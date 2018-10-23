@@ -1,13 +1,14 @@
-#include "main.hpp"
 #include <iostream>
+#include "main.hpp"
 
 static const int rsMin = 6, rsMax = 12;
+static const int rMonstersMax = 3;
 
 class bspList : public ITCODBspCallback {
 private:
 	Map &dungeon; int rNum; int lastx, lasty;
 public:
-	bspList(Map &dungeon) :dungeon(dungeon), rNum(0) {}
+	bspList(Map &dungeon) : dungeon(dungeon), rNum(0) {}
 	
 	bool visitNode(TCODBsp *node, void *userData) {
 		if (node->isLeaf()) {
@@ -39,11 +40,25 @@ Map::Map(int w, int h) : w(w), h(h) {
 	map = std::make_shared<TCODMap>(w, h);
 
 	TCODBsp bsp(0, 0, w, h);
-	bsp.splitRecursive(NULL, 8, rsMin, rsMax, 1.5f, 1.5f);
+	bsp.splitRecursive(NULL, 8, rsMax, rsMax, 1.5f, 1.5f);
 	bspList listener(*this);
 	bsp.traverseInvertedLevelOrder(&listener, NULL);
 
 	
+}
+
+
+void Map::addMonster(int x, int y) {
+	std::random_device seed;
+	std::default_random_engine dRoll(seed());
+	std::uniform_int_distribution<int> d100(1, 100);
+
+	auto dice = std::bind(d100, dRoll);
+
+	int mDice(dice());
+	if (mDice < 80) { engine.entL.emplace_back(std::make_shared<Ent>(x, y, 'g', "Gremlin", TCODColor::desaturatedGreen)); }
+	else { engine.entL.emplace_back(std::make_shared<Ent>(x, y, 'h', "Hobgobbo", TCODColor::darkOrange)); }
+
 }
 
 void Map::dig(int x1, int y1, int x2, int y2) {
@@ -66,7 +81,13 @@ void Map::cRoom(bool first, int x1, int y1, int x2, int y2) {
 	}
 	else {
 		TCODRandom *rng = TCODRandom::getInstance();
-		if (rng->getInt(0, 3) == 0) { engine.entL.emplace_back(std::make_shared<Ent>(cx, cy, '@', TCODColor::yellow)); }
+		int nbMonsters(rng->getInt(0, rMonstersMax));
+		while (nbMonsters > 0) {
+			int x(rng->getInt(x1, x2)), y(rng->getInt(y1, y2));
+			if (canWalk(x, y)) { addMonster(x, y); }
+			nbMonsters--;
+		}
+		//if (rng->getInt(0, 3) == 0) { engine.entL.emplace_back(std::make_shared<Ent>(cx, cy, '@', "NPC", TCODColor::yellow)); }
 	}
 }
 
@@ -84,6 +105,12 @@ bool Map::isInFov(int x, int y) const {
 
 void Map::computeFov() {
 	map->computeFov(engine.player->x, engine.player->y, engine.fovRad);
+}
+
+bool Map::canWalk(int x, int y) const {
+	if (isWall(x, y)) { return false; }
+	for (auto &ent : engine.entL) { if (ent->x == x && ent->y == y) { return false; } }
+	return true;
 }
 
 void Map::render() const {

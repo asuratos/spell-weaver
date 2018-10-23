@@ -3,6 +3,14 @@ public:
 	std::vector<std::shared_ptr<Ent>> entL;
 	std::unique_ptr<Map> dungeon;
 
+	enum gameState {
+		START,
+		IDLE,
+		TURN,
+		WIN,
+		LOSE
+	}gameState;
+
 	int fovRad;
 
 	Ent *player;
@@ -14,5 +22,6 @@ public:
 private:
 	bool computeFov;
 };
+
 
 extern Engine engine;

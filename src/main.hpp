@@ -2,6 +2,10 @@
 
 #include <vector>
 #include <memory>
+#include <random>
+#include <functional>
+#include <string>
+#include <iostream>
 
 #include "libtcod.hpp"
 #include "entity.hpp"
