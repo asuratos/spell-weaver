@@ -18,30 +18,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\engine.cpp">
       <Filter>Source Files\libtcodtuts</Filter>
     </ClCompile>
-    <ClCompile Include="map.cpp">
+    <ClCompile Include="src\entity.cpp">
       <Filter>Source Files\libtcodtuts</Filter>
     </ClCompile>
-    <ClCompile Include="engine.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files\libtcodtuts</Filter>
     </ClCompile>
-    <ClCompile Include="entity.cpp">
+    <ClCompile Include="src\map.cpp">
       <Filter>Source Files\libtcodtuts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.hpp">
+    <ClInclude Include="src\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="entity.hpp">
+    <ClInclude Include="src\entity.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine.hpp">
+    <ClInclude Include="src\main.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="map.hpp">
+    <ClInclude Include="src\map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
