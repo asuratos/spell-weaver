@@ -13,7 +13,7 @@ Engine::Engine() : fovRad(20), computeFov(true) , gameState(START){
 	dungeon = std::make_unique<Map>(80, 50);
 }
 
-Engine::~Engine() { entL.clear(); }
+Engine::~Engine() { entL.clear(); magicL.clear(); }
 
 void Engine::update() {
 	if (gameState == START) {
@@ -57,6 +57,7 @@ void Engine::update() {
 
 	gameState = IDLE;
 }
+
 
 void Engine::render() {
 	TCODConsole::root->clear(); dungeon->render();

@@ -149,12 +149,14 @@
   <ItemGroup>
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\magic.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine.hpp" />
     <ClInclude Include="src\entity.hpp" />
+    <ClInclude Include="src\magic.hpp" />
     <ClInclude Include="src\main.hpp" />
     <ClInclude Include="src\map.hpp" />
   </ItemGroup>

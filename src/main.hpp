@@ -10,4 +10,5 @@
 #include "libtcod.hpp"
 #include "entity.hpp"
 #include "map.hpp"
+#include "magic.hpp"
 #include "engine.hpp"

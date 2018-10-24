@@ -30,6 +30,9 @@
     <ClCompile Include="src\map.cpp">
       <Filter>Source Files\libtcodtuts</Filter>
     </ClCompile>
+    <ClCompile Include="src\magic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine.hpp">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\magic.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
