@@ -1,7 +1,7 @@
 #include "main.hpp"
 #include <iostream>
 
-Engine engine;
+Engine engine(80,50);
 
 int main() {
 	while (!TCODConsole::isWindowClosed()) {

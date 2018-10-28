@@ -1,23 +1,24 @@
 class Engine {
 public:
 	std::vector<std::shared_ptr<Ent>> entL;
-	std::vector<std::shared_ptr<Element>> magicL;
+	//std::vector<std::shared_ptr<Element>> magicL;
 	std::unique_ptr<Map> dungeon;
 
 	enum gameState {
 		START,
 		IDLE,
-		SPELL,
 		TURN,
 		WIN,
 		LOSE
 	}gameState;
 
-	int fovRad;
+	int fovRad, sW, sH;
 
-	Ent *player;
+	TCOD_key_t lastKey;
 
-	Engine(); ~Engine();
+	std::shared_ptr<Ent> player;
+
+	Engine(int sW, int sH); ~Engine();
 
 	void update(); void render();
 
