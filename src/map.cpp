@@ -131,10 +131,12 @@ void Map::render() const {
 		lWall(80, 80, 110),
 		lFloor(100, 100, 100);
 
+
 	for (int x = 0; x < w; x++) {
 		for (int y = 0; y < h; y++) {
 			if (isInFov(x, y)) {
 				TCODConsole::root->setCharBackground(x, y, isWall(x, y) ? lWall : lFloor);
+				TCODConsole::root->putChar(x, y, isWall(x, y) ? '#' : '.');
 			}
 			else if (isExplored(x, y)) {
 				TCODConsole::root->setCharBackground(x, y, isWall(x, y) ? dWall : dFloor);

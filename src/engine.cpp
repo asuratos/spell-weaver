@@ -4,7 +4,8 @@
 
 
 Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), gameState(START){
-	TCODConsole::setCustomFont("terminal.png", TCOD_FONT_LAYOUT_TCOD);
+	//TCODConsole::setCustomFont("terminal.png", TCOD_FONT_LAYOUT_TCOD);
+	TCODConsole::setCustomFont("Raving_1280x400.bmp", TCOD_FONT_LAYOUT_ASCII_INROW);
 	TCODConsole::initRoot(sW, sH, "libtcodtutsv0.6", false);
 	
 	player = std::make_shared<Ent>(1, 1, '@', "player", TCODColor::white);
@@ -75,6 +76,11 @@ void Engine::render() {
 	for (auto &ent : entL) { if (ent->mortal) { if (!ent->mortal->isDead()) { if (dungeon->isInFov(ent->x, ent->y)) { ent->render(); } } } }
 
 	player->render();
-	std::string hpdisplay = "HP : " + std::to_string(player->mortal->hp) + "/" + std::to_string(player->mortal->MaxHp);
-	TCODConsole::root->print(1, sH - 2, hpdisplay);
+
+	static std::stringstream hpDisplay;
+
+	hpDisplay.str(std::string());
+	hpDisplay << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
+
+	TCODConsole::root->print(1, sH - 2,  hpDisplay.str());
 }
