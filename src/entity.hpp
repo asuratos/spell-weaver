@@ -17,4 +17,4 @@ public:
 
 	void update(std::shared_ptr<Ent> owner);
 	void render() const;
-};
+}; //
