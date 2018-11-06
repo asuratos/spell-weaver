@@ -49,7 +49,7 @@ void Engine::update() {
 
 	if (tx != 0 || ty != 0) {
 		gameState = TURN;
-		if (player->moveOrAttack(player->x + tx, player->y + ty)) { dungeon->computeFov(); }
+		if (player->moveOrAttack(player->loc.x + tx, player->loc.y + ty)) { dungeon->computeFov(); }
 	}*/
 
 	if (gameState == TURN) {
@@ -71,9 +71,9 @@ void Engine::update() {
 void Engine::render() {
 	TCODConsole::root->clear(); dungeon->render();
 	
-	for (auto &ent : entL) { if (ent->mortal) { if (ent->mortal->isDead()) { if (dungeon->isInFov(ent->x, ent->y)) { ent->render(); } } } }
+	for (auto &ent : entL) { if (ent->mortal) { if (ent->mortal->isDead()) { if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { ent->render(); } } } }
 
-	for (auto &ent : entL) { if (ent->mortal) { if (!ent->mortal->isDead()) { if (dungeon->isInFov(ent->x, ent->y)) { ent->render(); } } } }
+	for (auto &ent : entL) { if (ent->mortal) { if (!ent->mortal->isDead()) { if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { ent->render(); } } } }
 
 	player->render();
 

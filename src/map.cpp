@@ -88,8 +88,8 @@ void Map::cRoom(bool first, int x1, int y1, int x2, int y2) {
 	dig(x1, y1, x2, y2);
 	int cx((x1 + x2) / 2), cy = ((y1 + y2) / 2);
 	if (first) {
-		engine.player->x = cx;
-		engine.player->y = cy;
+		engine.player->loc.x = cx;
+		engine.player->loc.y = cy;
 	}
 	else {
 		TCODRandom *rng = TCODRandom::getInstance();
@@ -116,12 +116,12 @@ bool Map::isInFov(int x, int y) const {
 }
 
 void Map::computeFov() {
-	map->computeFov(engine.player->x, engine.player->y, engine.fovRad);
+	map->computeFov(engine.player->loc.x, engine.player->loc.y, engine.fovRad);
 }
 
 bool Map::canWalk(int x, int y) const {
 	if (isWall(x, y)) { return false; }
-	for (auto &ent : engine.entL) { if (ent->x == x && ent->y == y) { return false; } }
+	for (auto &ent : engine.entL) { if (ent->loc.x == x && ent->loc.y == y) { return false; } }
 	return true;
 }
 
