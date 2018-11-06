@@ -12,6 +12,7 @@
 #include "libtcod.hpp"
 
 class Ent;
+struct coords;
 
 #include "mortal.hpp"
 #include "combat.hpp"

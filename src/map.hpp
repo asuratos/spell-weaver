@@ -5,6 +5,10 @@ struct Tile {
 	Tile() : explored (false) {}
 };
 
+struct coords {
+	int x, y;
+};
+
 class Map {
 public:
 	int w, h;

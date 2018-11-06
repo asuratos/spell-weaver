@@ -2,7 +2,8 @@
 
 class Ent {
 public:
-	int x, y, ch, speed; 
+	int ch, speed; 
+	coords loc;
 	std::string name;
 	bool blocks;
 
@@ -12,7 +13,7 @@ public:
 
 	TCODColor col;
 
-	Ent(int x, int y, int ch, std::string name, const TCODColor &col);
+	Ent(coords loc, int ch, std::string name, const TCODColor &col);
 	
 
 	void update(std::shared_ptr<Ent> owner);

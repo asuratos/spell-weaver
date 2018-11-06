@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+
 void PlayerAi::update(std::shared_ptr<Ent> owner){
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) {
@@ -24,7 +25,7 @@ void PlayerAi::update(std::shared_ptr<Ent> owner){
 		
 		if (tx != 0 || ty != 0) {
 			engine.gameState = Engine::TURN;
-			if (moveOrAttack(owner, owner->x + tx, owner->y + ty)) { engine.dungeon->computeFov(); }
+			if (moveOrAttack(owner, owner->loc.x + tx, owner->loc.y + ty)) { engine.dungeon->computeFov(); }
 		}
 		
 	}
@@ -34,16 +35,16 @@ bool PlayerAi::moveOrAttack(std::shared_ptr<Ent> owner, int tx, int ty) {
 	if (engine.dungeon->isWall(tx, ty)) return false;
 	for (auto &ent : engine.entL) {
 		if (ent->mortal) {
-			if (!ent->mortal->isDead() && ent->x == tx && ent->y==ty) {
+			if (!ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y==ty) {
 				owner->combat->attack(owner, ent); return false;
 			}
 		}
-		else if (ent->mortal->isDead() && ent->x == tx && ent->y == ty) {
+		else if (ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y == ty) {
 			std::cout << "A " << ent->mortal->corpseName << " lies here." << std::endl;
 		}
 	}
-	owner->x = tx;
-	owner->y = ty;
+	owner->loc.x = tx;
+	owner->loc.y = ty;
 	return true;
 }
 
@@ -53,18 +54,18 @@ void MobAi::update(std::shared_ptr<Ent> owner) {
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) { return; }
 	}
-	if (engine.dungeon->isInFov(owner->x, owner->y)) { moveCount = TRACK_TURNS; }
+	if (engine.dungeon->isInFov(owner->loc.x, owner->loc.y)) { moveCount = TRACK_TURNS; }
 	else { moveCount++; }
-	if (moveCount > 0) { moveOrAttack(owner, engine.player->x, engine.player->y); }
+	if (moveCount > 0) { moveOrAttack(owner, engine.player->loc.x, engine.player->loc.y); }
 }
 
 void MobAi::moveOrAttack(std::shared_ptr<Ent> owner, int tx, int ty) {
-	int dx(tx - owner->x), dy(ty - owner->y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
+	int dx(tx - owner->loc.x), dy(ty - owner->loc.y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
 	if (distance >= 2) {
 		dx = (int)(round(dx / distance)); dy = (int)(round(dy / distance));
-		if (engine.dungeon->canWalk(owner->x + dx, owner->y + dy)) { owner->x += dx; owner->y += dy; }
-		else if (engine.dungeon->canWalk(owner->x + sdx, owner->y)) { owner->x += sdx; }
-		else if (engine.dungeon->canWalk(owner->x, owner->y + sdy)) { owner->y += sdy; }
+		if (engine.dungeon->canWalk(owner->loc.x + dx, owner->y + dy)) { owner->loc.x += dx; owner->loc.y += dy; }
+		else if (engine.dungeon->canWalk(owner->loc.x + sdx, owner->loc.y)) { owner->loc.x += sdx; }
+		else if (engine.dungeon->canWalk(owner->loc.x, owner->loc.y + sdy)) { owner->loc.y += sdy; }
 	}
 	else if (owner->combat) { owner->combat->attack(owner, engine.player); }
 }

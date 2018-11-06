@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-Ent::Ent(int x, int y, int ch, std::string name, const TCODColor &col) : x(x), y(y), ch(ch), name(name), col(col), blocks(true), combat(nullptr), mortal(nullptr), ai(nullptr) {}
+Ent::Ent(coords loc, int ch, std::string name, const TCODColor &col) : loc(loc), ch(ch), name(name), col(col), blocks(true), combat(nullptr), mortal(nullptr), ai(nullptr) {}
 
 void Ent::update(std::shared_ptr<Ent> owner) { if (ai) ai->update(owner);}
 
