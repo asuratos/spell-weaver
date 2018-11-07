@@ -10,5 +10,5 @@ void Ent::update(std::shared_ptr<Ent> owner) {
 
 void Ent::render() const {
 	TCODConsole::root->setChar(loc.x, loc.y, ch);
-	TCODConsole::root->setCharForeground(loc.x, loc.y, col); 
+	TCODConsole::root->setCharForeground(loc.x, loc.y, col); //
 }
