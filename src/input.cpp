@@ -23,7 +23,6 @@ void InputHandler::process(std::shared_ptr<Ent> ent){
 	}
 
 	if (tx != 0 || ty != 0) {
-		engine.gameState = Engine::TURN;
 		if (ent->Pai->moveOrAttack(ent, ent->loc.x + tx, ent->loc.y + ty)) { engine.dungeon->computeFov(); }
 	}
 }

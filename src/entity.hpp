@@ -4,6 +4,10 @@ struct coords {
 	int x, y;
 
 	coords(int x, int y) : x(x), y(y) {}
+
+	coords mod(int dx, int dy);
+	coords mod(coords diff);
+
 };
 
 class Ent {

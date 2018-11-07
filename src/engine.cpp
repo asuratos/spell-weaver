@@ -26,32 +26,26 @@ void Engine::update() {
 	if (gameState == START) {
 		dungeon->computeFov();
 		render();
-		gameState = IDLE;
+		gameState = GAME;
 	}
-
-	//player->update(player);
-	
-	//if (gameState == TURN) {
+	if (gameState == GAME){
 		for (auto &ent : entL) {
 			if (ent->mortal) {
 				if (!ent->mortal->isDead()) { 
 					ent->clock->increment();
 					if (ent->clock->isReady()) {
-
 						ent->update(ent);
 						//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
 					}
-
 				}
 			}
 		}
-//	}
+	}
 	if (computeFov) {
 		dungeon->computeFov();
 		computeFov = false;
 	}
 
-	gameState = IDLE;
 }
 
 

@@ -6,8 +6,7 @@ public:
 
 	enum gameState {
 		START,
-		IDLE,
-		TURN,
+		GAME,
 		WIN,
 		LOSE
 	}gameState;

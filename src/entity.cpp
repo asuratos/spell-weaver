@@ -1,5 +1,13 @@
 #include "main.hpp"
 
+coords coords::mod(int dx, int dy) {
+	return coords(x + dx, y + dy);
+}
+
+coords coords::mod(coords diff) {
+	return coords(x + diff.x, y + diff.y);
+}
+
 Ent::Ent(coords loc, int ch, std::string name, const TCODColor &col) : loc(loc), ch(ch), name(name), col(col), blocks(true), 
 input(nullptr), combat(nullptr), mortal(nullptr), ai(nullptr), Pai(nullptr) {}
 
