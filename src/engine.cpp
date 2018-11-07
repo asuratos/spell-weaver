@@ -9,7 +9,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	TCODConsole::initRoot(sW, sH, "libtcodtutsv0.6", false);
 	
 	player = std::make_shared<Actor>(coords(1, 1), '@', "player", TCODColor::white);
-	player->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
+	static_cast<std::shared_ptr<Actor>>(player)->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
 	player->combat = std::make_shared<Combat>(5);
 	player->Pai = std::make_shared<PlayerAi>();
 	player->input = std::make_shared<InputHandler>();

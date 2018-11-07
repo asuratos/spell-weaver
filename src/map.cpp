@@ -57,7 +57,7 @@ void Map::addMonster(coords loc) {
 	
 	int mDice(dice());
 	if (mDice < 80) {
-		std::shared_ptr<Ent> gromlin = std::make_shared<Ent>(loc, 'g', "Gromlin", TCODColor::desaturatedGreen);
+		std::shared_ptr<Actor> gromlin = std::make_shared<Actor>(loc, 'g', "Gromlin", TCODColor::desaturatedGreen);
 		gromlin->mortal = std::make_shared<npcMortal>(10, 0, "dead gromlin");
 		gromlin->combat = std::make_shared<Combat>(3);
 		gromlin->ai = std::make_shared<MobAi>();
@@ -65,7 +65,7 @@ void Map::addMonster(coords loc) {
 		engine.entL.push_back(gromlin);
 	}
 	else {
-		std::shared_ptr<Ent> hobgobbo = std::make_shared<Ent>(loc, 'h', "Hobgobbo", TCODColor::darkOrange);
+		std::shared_ptr<Actor> hobgobbo = std::make_shared<Actor>(loc, 'h', "Hobgobbo", TCODColor::darkOrange);
 		hobgobbo->mortal = std::make_shared<npcMortal>(16, 1, "dead hobgobbo");
 		hobgobbo->combat = std::make_shared<Combat>(4);
 		hobgobbo->ai = std::make_shared<MobAi>();

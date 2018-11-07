@@ -13,6 +13,7 @@
 #include "libtcod.hpp"
 
 class Ent;
+class Actor;
 
 #include "mortal.hpp"
 #include "combat.hpp"
