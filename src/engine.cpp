@@ -13,6 +13,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	player->combat = std::make_shared<Combat>(5);
 	player->Pai = std::make_shared<PlayerAi>();
 	player->input = std::make_shared<InputHandler>();
+	player->clock = std::make_shared<Clock>(10);
 
 	entL.push_back(player);
 	
@@ -24,18 +25,27 @@ Engine::~Engine() { entL.clear(); }//magicL.clear(); }
 void Engine::update() {
 	if (gameState == START) {
 		dungeon->computeFov();
+		render();
 		gameState = IDLE;
 	}
 
-	player->update(player);
+	//player->update(player);
 	
-	if (gameState == TURN) {
+	//if (gameState == TURN) {
 		for (auto &ent : entL) {
 			if (ent->mortal) {
-				if (ent->name != "player" && !ent->mortal->isDead()) { ent->update(ent); }
+				if (!ent->mortal->isDead()) { 
+					ent->clock->increment();
+					if (ent->clock->isReady()) {
+
+						ent->update(ent);
+						//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
+					}
+
+				}
 			}
 		}
-	}
+//	}
 	if (computeFov) {
 		dungeon->computeFov();
 		computeFov = false;

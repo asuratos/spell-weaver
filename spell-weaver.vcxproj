@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ai.cpp" />
+    <ClCompile Include="src\clock.cpp" />
     <ClCompile Include="src\combat.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\entity.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ai.hpp" />
+    <ClInclude Include="src\clock.hpp" />
     <ClInclude Include="src\combat.hpp" />
     <ClInclude Include="src\engine.hpp" />
     <ClInclude Include="src\entity.hpp" />

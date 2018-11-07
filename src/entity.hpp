@@ -8,7 +8,7 @@ struct coords {
 
 class Ent {
 public:
-	int ch, speed, energy; 
+	int ch; 
 	coords loc;
 	std::string name;
 	bool blocks;
@@ -18,6 +18,7 @@ public:
 	std::shared_ptr<PlayerAi> Pai;
 	std::shared_ptr<Ai> ai;
 	std::shared_ptr<Mortal> mortal;
+	std::shared_ptr<Clock> clock;
 
 	TCODColor col;
 

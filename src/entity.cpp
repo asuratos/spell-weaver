@@ -6,9 +6,10 @@ input(nullptr), combat(nullptr), mortal(nullptr), ai(nullptr), Pai(nullptr) {}
 void Ent::update(std::shared_ptr<Ent> owner) { 
 	if (ai) ai->update(owner);
 	else if (Pai) Pai->update(owner);
+
 }
 
 void Ent::render() const {
 	TCODConsole::root->setChar(loc.x, loc.y, ch);
-	TCODConsole::root->setCharForeground(loc.x, loc.y, col); //
+	TCODConsole::root->setCharForeground(loc.x, loc.y, col); 
 }

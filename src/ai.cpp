@@ -13,19 +13,26 @@ void PlayerAi::update(std::shared_ptr<Ent> owner){
 }
 
 bool PlayerAi::moveOrAttack(std::shared_ptr<Ent> owner, int tx, int ty) {
-	if (engine.dungeon->isWall(tx, ty)) return false;
+	if (engine.dungeon->isWall(tx, ty)) {
+		owner->clock->decrement(50);
+		return false;
+	}
 	for (auto &ent : engine.entL) {
 		if (ent->mortal) {
 			if (!ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y==ty) {
-				owner->combat->attack(owner, ent); return false;
+				owner->combat->attack(owner, ent);
+				owner->clock->decrement(50); 
+				return false;
 			}
-		}
-		else if (ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y == ty) {
-			std::cout << "A " << ent->mortal->corpseName << " lies here." << std::endl;
+		
+			else if (ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y == ty) {
+				std::cout << "A " << ent->mortal->corpseName << " lies here." << std::endl;
+			}
 		}
 	}
 	owner->loc.x = tx;
 	owner->loc.y = ty;
+	owner->clock->decrement(50);
 	return true;
 }
 
@@ -49,4 +56,6 @@ void MobAi::moveOrAttack(std::shared_ptr<Ent> owner, int tx, int ty) {
 		else if (engine.dungeon->canWalk(coords(owner->loc.x, owner->loc.y + sdy))) { owner->loc.y += sdy; }
 	}
 	else if (owner->combat) { owner->combat->attack(owner, engine.player); }
+
+	owner->clock->decrement(50);
 }

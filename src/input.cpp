@@ -3,7 +3,7 @@
 InputHandler::InputHandler() {}
 
 void InputHandler::process(std::shared_ptr<Ent> ent){
-	TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS, &engine.lastKey, NULL);
+	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &engine.lastKey, NULL, false);
 	
 	int tx = 0, ty = 0;
 	switch (engine.lastKey.vk) {

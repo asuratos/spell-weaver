@@ -17,6 +17,7 @@ class Ent;
 #include "combat.hpp"
 #include "ai.hpp"
 #include "input.hpp"
+#include "clock.hpp"
 #include "entity.hpp"
 #include "map.hpp"
 #include "magic.hpp"
