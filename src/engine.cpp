@@ -9,7 +9,9 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	TCODConsole::initRoot(sW, sH, "libtcodtutsv0.6", false);
 	
 	player = std::make_shared<Actor>(coords(1, 1), '@', "player", TCODColor::white);
-	static_cast<std::shared_ptr<Actor>>(player)->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
+	//std::shared_ptr<Actor> player = static_cast<std::shared_ptr<Actor>>(player);
+
+	player->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
 	player->combat = std::make_shared<Combat>(5);
 	player->Pai = std::make_shared<PlayerAi>();
 	player->input = std::make_shared<InputHandler>();
@@ -30,6 +32,7 @@ void Engine::update() {
 	}
 	if (gameState == GAME){
 		for (auto &ent : entL) {
+			std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Actor>>(ent);
 			if (ent->clock) {
 				if (!ent->mortal->isDead()) { 
 					ent->clock->increment();
@@ -49,12 +52,28 @@ void Engine::update() {
 
 
 void Engine::render() {
-	TCODConsole::root->clear(); dungeon->render();
+	TCODConsole::root->clear(); 
+	dungeon->render();
 	
-	for (auto &ent : entL) { if (ent->mortal) { if (ent->mortal->isDead()) { if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { ent->render(); } } } }
-
-	for (auto &ent : entL) { if (ent->mortal) { if (!ent->mortal->isDead()) { if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { ent->render(); } } } }
-
+	for (auto &ent : entL) { 
+		std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Ent>>(ent);
+		if (ent->clock) { 
+			if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { 
+				ent->render(); 
+			} 
+		}
+	}
+	/*
+	for (auto &ent : entL) { 
+		if (ent->mortal) { 
+			if (!ent->mortal->isDead()) { 
+				if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { 
+					ent->render(); } 
+			}
+		}
+	}
+	*/
+	std::shared_ptr<Actor> player = static_cast<std::shared_ptr<Actor>>(player);
 	player->render();
 
 	static std::stringstream hpDisplay;

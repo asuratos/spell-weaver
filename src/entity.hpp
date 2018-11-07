@@ -1,4 +1,5 @@
 #pragma once
+#include "main.hpp"
 
 struct coords {
 	int x, y;
@@ -17,28 +18,33 @@ public:
 	std::string name;
 	bool blocks;
 
+	enum entityType {
+		ACTOR,
+		SPELL
+	}entityType;
+
 	TCODColor col;
 
-	virtual void update() = 0;
-	virtual void render() = 0;
+	//virtual void update(std::shared_ptr<Ent> owner) = 0;
+	virtual void render() const = 0;
 
 	virtual ~Ent();
 
-protected:
-	Ent(coords loc, int ch, std::string name, const TCODColor &col) : loc(loc), ch(ch), name(name), col(col), blocks(true){}
+	Ent(coords loc, int ch, std::string name, const TCODColor &col);
 }; 
 
 class Actor : public Ent {
 public:
-	std::shared_ptr<Mortal> mortal = {};
-	std::shared_ptr<Clock> clock = {};
-	std::shared_ptr<InputHandler> input = {};
-	std::shared_ptr<Combat> combat = {};
-	std::shared_ptr<PlayerAi> Pai = {};
-	std::shared_ptr<Ai> ai = {};
+	//entityType = ACTOR;
+	std::shared_ptr<Mortal> mortal;
+	std::shared_ptr<Clock> clock;
+	std::shared_ptr<InputHandler> input;
+	std::shared_ptr<Combat> combat ;
+	std::shared_ptr<PlayerAi> Pai ;
+	std::shared_ptr<Ai> ai ;
 
-	Actor(coords loc, int ch, std::string name, const TCODColor &col) : Ent(loc, ch, name, col) {}; ~Actor();
+	Actor(coords loc, int ch, std::string name, const TCODColor &col); ~Actor();
 
 	void update(std::shared_ptr<Actor> owner);
-	void render() const;
+	virtual void render() const;
 };

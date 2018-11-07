@@ -15,7 +15,7 @@ public:
 
 	TCOD_key_t lastKey;
 
-	std::shared_ptr<Ent> player;
+	std::shared_ptr<Actor> player;
 
 	Engine(int sW, int sH); ~Engine();
 

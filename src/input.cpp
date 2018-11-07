@@ -2,7 +2,7 @@
 
 InputHandler::InputHandler() {}
 
-void InputHandler::process(std::shared_ptr<Ent> ent){
+void InputHandler::process(std::shared_ptr<Actor> ent){
 	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &engine.lastKey, NULL, false);
 	
 	int tx = 0, ty = 0;

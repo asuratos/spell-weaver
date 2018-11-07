@@ -8,7 +8,15 @@ coords coords::mod(coords diff) {
 	return coords(x + diff.x, y + diff.y);
 }
 
-Actor::Actor(coords loc, int ch, std::string name, const TCODColor &col) : Ent(loc, ch, name, col) {}
+Ent::Ent(coords loc, int ch, std::string name, const TCODColor &col) : loc(loc), ch(ch), name(name), col(col), blocks(true) {}
+
+Actor::Actor(coords loc, int ch, std::string name, const TCODColor &col) : Ent(loc, ch, name, col),
+	mortal(nullptr),
+	clock(nullptr),
+	input(nullptr),
+	combat(nullptr),
+	Pai(nullptr),
+	ai(nullptr)	{}
 
 Actor::~Actor() {}
 

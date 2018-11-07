@@ -18,7 +18,7 @@ bool PlayerAi::moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty) {
 		return false;
 	}
 	for (auto &ent : engine.entL) {
-		std::shared_ptr<Actor> ent = (std::shared_ptr<Actor>)ent;
+		std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Actor>>(ent);
 		if (ent->mortal) {
 			if (!ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y==ty) {
 				owner->combat->attack(owner, ent);
@@ -56,7 +56,10 @@ void MobAi::moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty) {
 		else if (engine.dungeon->canWalk(coords(owner->loc.x + sdx, owner->loc.y))) { owner->loc.x += sdx; }
 		else if (engine.dungeon->canWalk(coords(owner->loc.x, owner->loc.y + sdy))) { owner->loc.y += sdy; }
 	}
-	else if (owner->combat) { owner->combat->attack(owner, engine.player); }
+	else if (owner->combat) { 
+		std::shared_ptr<Actor> target = static_cast<std::shared_ptr<Actor>>(engine.player);
+		owner->combat->attack(owner, target); 
+	}
 
 	owner->clock->decrement(50);
 }
