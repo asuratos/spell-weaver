@@ -17,19 +17,24 @@ public:
 	std::string name;
 	bool blocks;
 
-	std::shared_ptr<InputHandler> input;
-	std::shared_ptr<Combat> combat;
-	std::shared_ptr<PlayerAi> Pai;
-	std::shared_ptr<Ai> ai;
-	std::shared_ptr<Mortal> mortal;
-	std::shared_ptr<Clock> clock;
+	std::shared_ptr<Mortal> mortal = {};
+	std::shared_ptr<Clock> clock = {};
 
 	TCODColor col;
 
 	Ent(coords loc, int ch, std::string name, const TCODColor &col);
 	
 
-	void update(std::shared_ptr<Ent> owner);
-	void render() const;
+	virtual void update(std::shared_ptr<Ent> owner);
+	virtual void render() const;
 }; 
 
+class Actor : public Ent {
+	std::shared_ptr<InputHandler> input = {};
+	std::shared_ptr<Combat> combat = {};
+	std::shared_ptr<PlayerAi> Pai = {};
+	std::shared_ptr<Ai> ai = {};
+
+	void update(std::shared_ptr<Ent> owner);
+	void render();
+};
