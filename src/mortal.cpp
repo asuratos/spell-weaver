@@ -14,6 +14,7 @@ void Mortal::die(std::shared_ptr<Ent> owner) {
 	owner->col = TCODColor::darkRed;
 	owner->name = corpseName;
 	owner->blocks = false;
+	owner->clock = nullptr;
 }
 
 pcMortal::pcMortal(float MaxHp, float def, std::string corpseName) :

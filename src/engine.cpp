@@ -20,7 +20,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	dungeon = std::make_unique<Map>(80, 45);
 }
 
-Engine::~Engine() { entL.clear(); }//magicL.clear(); }
+Engine::~Engine() { entL.clear(); }
 
 void Engine::update() {
 	if (gameState == START) {
@@ -30,12 +30,11 @@ void Engine::update() {
 	}
 	if (gameState == GAME){
 		for (auto &ent : entL) {
-			if (ent->mortal) {
+			if (ent->clock) {
 				if (!ent->mortal->isDead()) { 
 					ent->clock->increment();
 					if (ent->clock->isReady()) {
 						ent->update(ent);
-						//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
 					}
 				}
 			}
