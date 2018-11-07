@@ -11,7 +11,8 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	player = std::make_shared<Ent>(coords(1, 1), '@', "player", TCODColor::white);
 	player->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
 	player->combat = std::make_shared<Combat>(5);
-	player->ai = std::make_shared<PlayerAi>();
+	player->Pai = std::make_shared<PlayerAi>();
+	player->input = std::make_shared<InputHandler>();
 
 	entL.push_back(player);
 	

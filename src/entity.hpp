@@ -15,6 +15,7 @@ public:
 
 	std::shared_ptr<InputHandler> input;
 	std::shared_ptr<Combat> combat;
+	std::shared_ptr<PlayerAi> Pai;
 	std::shared_ptr<Ai> ai;
 	std::shared_ptr<Mortal> mortal;
 

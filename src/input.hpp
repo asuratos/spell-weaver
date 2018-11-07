@@ -2,5 +2,7 @@
 
 class InputHandler	 {
 public:
-	void process();
+	InputHandler();
+
+	void process(std::shared_ptr<Ent> ent);
 };

@@ -10,7 +10,7 @@ void Combat::attack(std::shared_ptr<Ent> attacker, std::shared_ptr<Ent> target) 
 				std::cout << attacker->name << " attacks " << target->name << " for " << dmg << " damage!" << std::endl;
 
 				target->mortal->takeDamage(target, atk);
-			}
+			}	
 		}
 	}
 }
