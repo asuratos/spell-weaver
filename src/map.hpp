@@ -5,9 +5,7 @@ struct Tile {
 	Tile() : explored (false) {}
 };
 
-struct coords {
-	int x, y;
-};
+
 
 class Map {
 public:
@@ -19,9 +17,9 @@ public:
 	bool isInFov(int x, int y) const;
 	bool isExplored(int x, int y) const;
 	bool isWall(int x, int y) const;
-	bool canWalk(int x, int y) const;
+	bool canWalk(coords loc) const;
 	
-	void addMonster(int x, int y);
+	void addMonster(coords loc);
 	void computeFov();
 	void render() const;
 

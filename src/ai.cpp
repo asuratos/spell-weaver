@@ -6,6 +6,9 @@ void PlayerAi::update(std::shared_ptr<Ent> owner){
 		if (owner->mortal->isDead()) {
 			return;
 		}
+
+		owner->input->process();
+
 		int tx = 0, ty = 0;
 		switch (engine.lastKey.vk) {
 		case TCODK_CHAR:
@@ -63,9 +66,9 @@ void MobAi::moveOrAttack(std::shared_ptr<Ent> owner, int tx, int ty) {
 	int dx(tx - owner->loc.x), dy(ty - owner->loc.y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
 	if (distance >= 2) {
 		dx = (int)(round(dx / distance)); dy = (int)(round(dy / distance));
-		if (engine.dungeon->canWalk(owner->loc.x + dx, owner->loc.y + dy)) { owner->loc.x += dx; owner->loc.y += dy; }
-		else if (engine.dungeon->canWalk(owner->loc.x + sdx, owner->loc.y)) { owner->loc.x += sdx; }
-		else if (engine.dungeon->canWalk(owner->loc.x, owner->loc.y + sdy)) { owner->loc.y += sdy; }
+		if (engine.dungeon->canWalk(coords(owner->loc.x + dx, owner->loc.y + dy))) { owner->loc.x += dx; owner->loc.y += dy; }
+		else if (engine.dungeon->canWalk(coords(owner->loc.x + sdx, owner->loc.y))) { owner->loc.x += sdx; }
+		else if (engine.dungeon->canWalk(coords(owner->loc.x, owner->loc.y + sdy))) { owner->loc.y += sdy; }
 	}
 	else if (owner->combat) { owner->combat->attack(owner, engine.player); }
 }

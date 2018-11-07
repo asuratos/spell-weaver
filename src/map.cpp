@@ -48,7 +48,7 @@ Map::Map(int w, int h) : w(w), h(h) {
 }
 
 
-void Map::addMonster(int x, int y) {
+void Map::addMonster(coords loc) {
 	std::random_device seed;
 	std::default_random_engine dRoll(seed());
 	std::uniform_int_distribution<int> d100(1, 100);
@@ -57,14 +57,14 @@ void Map::addMonster(int x, int y) {
 
 	int mDice(dice());
 	if (mDice < 80) {
-		std::shared_ptr<Ent> gromlin = std::make_shared<Ent>(x, y, 'g', "Gromlin", TCODColor::desaturatedGreen);
+		std::shared_ptr<Ent> gromlin = std::make_shared<Ent>(loc, 'g', "Gromlin", TCODColor::desaturatedGreen);
 		gromlin->mortal = std::make_shared<npcMortal>(10, 0, "dead gromlin");
 		gromlin->combat = std::make_shared<Combat>(3);
 		gromlin->ai = std::make_shared<MobAi>();
 		engine.entL.push_back(gromlin);
 	}
 	else {
-		std::shared_ptr<Ent> hobgobbo = std::make_shared<Ent>(x, y, 'h', "Hobgobbo", TCODColor::darkOrange);
+		std::shared_ptr<Ent> hobgobbo = std::make_shared<Ent>(loc, 'h', "Hobgobbo", TCODColor::darkOrange);
 		hobgobbo->mortal = std::make_shared<npcMortal>(16, 1, "dead hobgobbo");
 		hobgobbo->combat = std::make_shared<Combat>(4);
 		hobgobbo->ai = std::make_shared<MobAi>();
@@ -95,8 +95,8 @@ void Map::cRoom(bool first, int x1, int y1, int x2, int y2) {
 		TCODRandom *rng = TCODRandom::getInstance();
 		int nbMonsters(rng->getInt(0, rMonstersMax));
 		while (nbMonsters > 0) {
-			int x(rng->getInt(x1, x2)), y(rng->getInt(y1, y2));
-			if (canWalk(x, y)) { addMonster(x, y); }
+			coords loc((rng->getInt(x1, x2)), (rng->getInt(y1, y2)));
+			if (canWalk(loc)) { addMonster(loc); }
 			nbMonsters--;
 		}
 		//if (rng->getInt(0, 3) == 0) { engine.entL.emplace_back(std::make_shared<Ent>(cx, cy, '@', "NPC", TCODColor::yellow)); }
@@ -119,9 +119,9 @@ void Map::computeFov() {
 	map->computeFov(engine.player->loc.x, engine.player->loc.y, engine.fovRad);
 }
 
-bool Map::canWalk(int x, int y) const {
-	if (isWall(x, y)) { return false; }
-	for (auto &ent : engine.entL) { if (ent->loc.x == x && ent->loc.y == y) { return false; } }
+bool Map::canWalk(coords loc) const {
+	if (isWall(loc.x, loc.y)) { return false; }
+	for (auto &ent : engine.entL) { if (ent->loc.x == loc.x && ent->loc.y == loc.y) { return false; } }
 	return true;
 }
 

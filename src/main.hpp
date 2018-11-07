@@ -12,8 +12,8 @@
 #include "libtcod.hpp"
 
 class Ent;
-struct coords;
 
+#include "input.hpp"
 #include "mortal.hpp"
 #include "combat.hpp"
 #include "ai.hpp"

@@ -1,12 +1,19 @@
 #pragma once
 
+struct coords {
+	int x, y;
+
+	coords(int x, int y) : x(x), y(y) {}
+};
+
 class Ent {
 public:
-	int ch, speed; 
+	int ch, speed, energy; 
 	coords loc;
 	std::string name;
 	bool blocks;
 
+	std::shared_ptr<InputHandler> input;
 	std::shared_ptr<Combat> combat;
 	std::shared_ptr<Ai> ai;
 	std::shared_ptr<Mortal> mortal;
