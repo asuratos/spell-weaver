@@ -128,8 +128,8 @@ bool Map::canWalk(coords loc) const {
 void Map::render() const {
 	static const TCODColor dWall(0, 0, 30), 
 		dFloor(50, 50, 80),
-		lWall(80, 80, 110),
-		lFloor(100, 100, 100);
+		lWall(0, 0, 0), //80, 80, 1105
+		lFloor(0, 0, 0); //100, 100, 100
 
 
 	for (int x = 0; x < w; x++) {

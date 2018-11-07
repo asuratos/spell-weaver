@@ -5,11 +5,11 @@ void InputHandler::process(){
 	
 	switch (engine.lastKey.vk) {
 	case (TCODK_CHAR):
-		switch (engine.lastKey.c){
-			case 'h': return MoveLeft(1)
-
-			case 'j':
-			case 'k':
-			case 'l':
+		switch (engine.lastKey.c) {
+		case 'h':break;
+		case 'j':break;
+		case 'k':break;
+		case 'l':break;
+		}
 	}
 }
