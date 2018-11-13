@@ -16,6 +16,7 @@ class Ent;
 class Actor;
 
 #include "mortal.hpp"
+#include "display.hpp"
 #include "combat.hpp"
 #include "ai.hpp"
 #include "input.hpp"

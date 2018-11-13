@@ -2,7 +2,7 @@
 
 class InputHandler	 {
 public:
-	InputHandler();
+	InputHandler(); ~InputHandler();
 
-	void process(std::shared_ptr<Actor> ent);
+	void process(std::shared_ptr<Entity> ent);
 };

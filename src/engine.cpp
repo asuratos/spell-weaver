@@ -8,8 +8,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	TCODConsole::setCustomFont("Raving_1280x400.bmp", TCOD_FONT_LAYOUT_ASCII_INROW);
 	TCODConsole::initRoot(sW, sH, "libtcodtutsv0.6", false);
 	
-	player = std::make_shared<Actor>(coords(1, 1), '@', "player", TCODColor::white);
-	//std::shared_ptr<Actor> player = static_cast<std::shared_ptr<Actor>>(player);
+	std::shared_ptr<Actor> player = std::make_shared<Actor>(coords(1, 1), '@', std::string("player"), TCODColor::white);
 
 	player->mortal = std::make_shared<pcMortal>(30, 2, "your lifeless corpse");
 	player->combat = std::make_shared<Combat>(5);
@@ -56,7 +55,7 @@ void Engine::render() {
 	dungeon->render();
 	
 	for (auto &ent : entL) { 
-		std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Ent>>(ent);
+		std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Actor>>(ent);
 		if (ent->clock) { 
 			if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { 
 				ent->render(); 

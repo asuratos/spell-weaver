@@ -11,40 +11,41 @@ struct coords {
 
 };
 
-class Ent {
+
+//small components
+class Corporeal {
 public:
-	int ch;
 	coords loc;
-	std::string name;
 	bool blocks;
 
+	Corporeal(coords loc, bool blocks); ~Corporeal();
+};
+
+
+//entity class itself only contains pointers to components
+class Entity {
+public:
 	enum entityType {
 		ACTOR,
 		SPELL
 	}entityType;
 
-	TCODColor col;
+	int type = ACTOR;
+	std::string name;
 
-	//virtual void update(std::shared_ptr<Ent> owner) = 0;
-	virtual void render() const = 0;
+	//pointers to components go here
+	std::shared_ptr<Corporeal> corporeal = nullptr;
+	std::shared_ptr<Display> disp = nullptr;
+	std::shared_ptr<Clock> clock = nullptr;
 
-	virtual ~Ent();
+	std::shared_ptr<Mortal> mortal = nullptr;
+	std::shared_ptr<InputHandler> input = nullptr;
+	std::shared_ptr<Combat> combat = nullptr;
+	std::shared_ptr<Ai> ai = nullptr;
+	/*
+	void update(std::shared_ptr<Ent> owner);
+	void render() const;
+	*/
 
-	Ent(coords loc, int ch, std::string name, const TCODColor &col);
+	Entity(int ch, std::string name, TCODColor &col, int type); ~Entity();
 }; 
-
-class Actor : public Ent {
-public:
-	//entityType = ACTOR;
-	std::shared_ptr<Mortal> mortal;
-	std::shared_ptr<Clock> clock;
-	std::shared_ptr<InputHandler> input;
-	std::shared_ptr<Combat> combat ;
-	std::shared_ptr<PlayerAi> Pai ;
-	std::shared_ptr<Ai> ai ;
-
-	Actor(coords loc, int ch, std::string name, const TCODColor &col); ~Actor();
-
-	void update(std::shared_ptr<Actor> owner);
-	virtual void render() const;
-};

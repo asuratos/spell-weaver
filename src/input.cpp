@@ -2,7 +2,9 @@
 
 InputHandler::InputHandler() {}
 
-void InputHandler::process(std::shared_ptr<Actor> ent){
+InputHandler::~InputHandler() {}
+
+void InputHandler::process(std::shared_ptr<Entity> ent){
 	TCODSystem::waitForEvent(TCOD_EVENT_KEY_PRESS, &engine.lastKey, NULL, false);
 	
 	int tx = 0, ty = 0;
@@ -13,6 +15,7 @@ void InputHandler::process(std::shared_ptr<Actor> ent){
 		case 'j': ty = 1; break;
 		case 'h': tx = -1; break;
 		case 'l': tx = 1; break;
+		case 'z': break;
 		}
 		break;
 	case TCODK_UP: ty = 1; break;
@@ -23,6 +26,6 @@ void InputHandler::process(std::shared_ptr<Actor> ent){
 	}
 
 	if (tx != 0 || ty != 0) {
-		if (ent->Pai->moveOrAttack(ent, ent->loc.x + tx, ent->loc.y + ty)) { engine.dungeon->computeFov(); }
+		if (ent->Pai->moveOrAttack(ent, ent->corporeal->loc.x + tx, ent->corporeal->loc.y + ty)) { engine.dungeon->computeFov(); }
 	}
 }
