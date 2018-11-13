@@ -2,7 +2,7 @@
 
 Combat::Combat(float atk) : atk(atk) {};
 
-void Combat::attack(std::shared_ptr<Actor> attacker, std::shared_ptr<Actor> target) {
+void Combat::attack(std::shared_ptr<Entity> attacker, std::shared_ptr<Entity> target) {
 	if (target->mortal) {
 		if (!target->mortal->isDead()) {
 			float dmg = atk - target->mortal->def;

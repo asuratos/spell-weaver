@@ -1,29 +1,51 @@
 #include "main.hpp"
 
+void Ai::update(std::shared_ptr<Entity> owner) {
+	if (owner->mortal) {
+		if (owner->mortal->isDead()) { return; }
+	}
+	if (engine.dungeon->isInFov(owner->corporeal->loc.x, owner->corporeal->loc.y)) { moveCount = TRACK_TURNS; }
+	else { moveCount++; }
+	if (moveCount > 0) { moveOrAttack(owner, engine.player->corporeal->loc.x, engine.player->corporeal->loc.y); }
+}
 
-void PlayerAi::update(std::shared_ptr<Actor> owner){
+void Ai::moveOrAttack(std::shared_ptr<Entity> owner, int tx, int ty) {
+	int dx(tx - owner->corporeal->loc.x), dy(ty - owner->corporeal->loc.y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
+	if (distance >= 2) {
+		dx = (int)(round(dx / distance)); dy = (int)(round(dy / distance));
+		if (engine.dungeon->canWalk(coords(owner->corporeal->loc.x + dx, owner->corporeal->loc.y + dy))) { 
+			owner->corporeal->loc.x += dx; owner->corporeal->loc.y += dy; 
+		}
+		else if (engine.dungeon->canWalk(coords(owner->corporeal->loc.x + sdx, owner->corporeal->loc.y))) { 
+			owner->corporeal->loc.x += sdx; 
+		}
+		else if (engine.dungeon->canWalk(coords(owner->corporeal->loc.x, owner->corporeal->loc.y + sdy))) { 
+			owner->corporeal->loc.y += sdy; 
+		}
+	}
+	else if (owner->combat) {
+		owner->combat->attack(owner, engine.player);
+	}
+
+	owner->clock->decrement(owner->clock->walkCost);
+}
+
+void PlayerAi::update(std::shared_ptr<Entity> owner){
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) {
 			return;
 		}
 
 		owner->input->process(owner);
-
 	}
 }
 
-bool PlayerAi::moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty) {
+bool PlayerAi::moveOrAttack(std::shared_ptr<Entity> owner, int tx, int ty) {
 	if (engine.dungeon->isWall(tx, ty)) {
-		owner->clock->decrement(50);
-		return false;
 	}
 	for (auto &ent : engine.entL) {
-		std::shared_ptr<Actor> ent = static_cast<std::shared_ptr<Actor>>(ent);
 		if (ent->mortal) {
 			if (!ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y==ty) {
-				owner->combat->attack(owner, ent);
-				owner->clock->decrement(50); 
-				return false;
 			}
 		
 			else if (ent->mortal->isDead() && ent->loc.x == tx && ent->loc.y == ty) {
@@ -33,33 +55,12 @@ bool PlayerAi::moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty) {
 	}
 	owner->loc.x = tx;
 	owner->loc.y = ty;
-	owner->clock->decrement(50);
+	owner->clock->decrement(owner->clock->walkCost);
 	return true;
 }
 
 static const int TRACK_TURNS(3);
 
-void MobAi::update(std::shared_ptr<Actor> owner) {
-	if (owner->mortal) {
-		if (owner->mortal->isDead()) { return; }
-	}
-	if (engine.dungeon->isInFov(owner->loc.x, owner->loc.y)) { moveCount = TRACK_TURNS; }
-	else { moveCount++; }
-	if (moveCount > 0) { moveOrAttack(owner, engine.player->loc.x, engine.player->loc.y); }
-}
+void MobAi::update(std::shared_ptr<Entity> owner) {
 
-void MobAi::moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty) {
-	int dx(tx - owner->loc.x), dy(ty - owner->loc.y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
-	if (distance >= 2) {
-		dx = (int)(round(dx / distance)); dy = (int)(round(dy / distance));
-		if (engine.dungeon->canWalk(coords(owner->loc.x + dx, owner->loc.y + dy))) { owner->loc.x += dx; owner->loc.y += dy; }
-		else if (engine.dungeon->canWalk(coords(owner->loc.x + sdx, owner->loc.y))) { owner->loc.x += sdx; }
-		else if (engine.dungeon->canWalk(coords(owner->loc.x, owner->loc.y + sdy))) { owner->loc.y += sdy; }
-	}
-	else if (owner->combat) { 
-		std::shared_ptr<Actor> target = static_cast<std::shared_ptr<Actor>>(engine.player);
-		owner->combat->attack(owner, target); 
-	}
-
-	owner->clock->decrement(50);
 }

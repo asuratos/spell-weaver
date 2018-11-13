@@ -9,21 +9,7 @@ public:
 
 	bool isDead() { return hp <= 0; }
 
-	float takeDamage(std::shared_ptr<Actor> owner, float dmg);
+	float takeDamage(std::shared_ptr<Entity> owner, float dmg);
 
-	virtual void die(std::shared_ptr<Actor> owner) = 0;
-};
-
-class pcMortal : public Mortal {
-public:
-	pcMortal(float MaxHp, float def, const std::string corpseName);
-
-	void die(std::shared_ptr<Actor> owner);
-};
-
-class npcMortal : public Mortal {
-public:
-	npcMortal(float MaxHp, float def, const std::string corpseName);
-
-	void die(std::shared_ptr<Actor> owner);
+	void die(std::shared_ptr<Entity> owner);
 };

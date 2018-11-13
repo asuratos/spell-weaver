@@ -24,4 +24,5 @@ class Actor;
 #include "entity.hpp"
 #include "map.hpp"
 #include "magic.hpp"
+#include "movement.hpp"
 #include "engine.hpp"

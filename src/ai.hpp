@@ -2,19 +2,14 @@
 
 class Ai {
 public:
-	virtual void update(std::shared_ptr<Actor> owner) = 0;
+	int moveCount;
+
+	void update(std::shared_ptr<Entity> owner);
+	void moveOrAttack(std::shared_ptr<Entity> owner, int tx, int ty);
 };
 
 class PlayerAi : public Ai {
 public:
-	virtual void update(std::shared_ptr<Actor> owner);
-	bool moveOrAttack(std::shared_ptr<Actor> owner,  int tx,  int ty);
-};
-
-class MobAi : public Ai {
-public:
-	virtual void update(std::shared_ptr<Actor> owner);
-	int moveCount;
-
-	void moveOrAttack(std::shared_ptr<Actor> owner, int tx, int ty);
+	virtual void update(std::shared_ptr<Entity> owner);
+	bool moveOrAttack(std::shared_ptr<Entity> owner,  int tx,  int ty);
 };

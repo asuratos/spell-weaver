@@ -6,9 +6,13 @@ struct coords {
 
 	coords(int x, int y) : x(x), y(y) {}
 
-	coords mod(int dx, int dy);
-	coords mod(coords diff);
+	coords operator +(coords a) {
+		return coords(a.x + x, a.y + y);
+	}
 
+	bool operator ==(coords a) {
+		return (a.x == x && a.y == y);
+	}
 };
 
 
@@ -28,24 +32,26 @@ public:
 	enum entityType {
 		ACTOR,
 		SPELL
-	}entityType;
+	};
 
-	int type = ACTOR;
+	entityType type = ACTOR;
 	std::string name;
+	bool isPlayer;
 
 	//pointers to components go here
 	std::shared_ptr<Corporeal> corporeal = nullptr;
 	std::shared_ptr<Display> disp = nullptr;
 	std::shared_ptr<Clock> clock = nullptr;
-
 	std::shared_ptr<Mortal> mortal = nullptr;
-	std::shared_ptr<InputHandler> input = nullptr;
 	std::shared_ptr<Combat> combat = nullptr;
-	std::shared_ptr<Ai> ai = nullptr;
-	/*
-	void update(std::shared_ptr<Ent> owner);
-	void render() const;
-	*/
 
-	Entity(int ch, std::string name, TCODColor &col, int type); ~Entity();
+	std::shared_ptr<InputHandler> input = nullptr;
+	std::shared_ptr<Ai> ai = nullptr;
+	
+
+	void update(std::shared_ptr<Entity> owner);
+	void render() const;
+	
+
+	Entity(std::string name, entityType type); ~Entity();
 }; 

@@ -19,7 +19,7 @@ public:
 	bool isWall(int x, int y) const;
 	bool canWalk(coords loc) const;
 	
-	void addMonster(coords loc);
+	//void addMonster(coords loc);
 	void computeFov();
 	void render() const;
 
@@ -30,6 +30,6 @@ protected:
 	std::shared_ptr<TCODMap> map;
 
 	void dig(int x1, int y1, int x2, int y2),
-		cRoom(bool first, int x1, int y1, int x2, int y2),
-		setWall(int x, int y);
+		cRoom(bool first, int x1, int y1, int x2, int y2);
+		//setWall(int x, int y);
 };

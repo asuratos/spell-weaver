@@ -47,7 +47,7 @@ Map::Map(int w, int h) : w(w), h(h) {
 	
 }
 
-
+/*
 void Map::addMonster(coords loc) {
 	std::random_device seed;
 	std::default_random_engine dRoll(seed());
@@ -73,7 +73,7 @@ void Map::addMonster(coords loc) {
 		engine.entL.push_back(hobgobbo);
 	}
 
-}
+}*/
 
 void Map::dig(int x1, int y1, int x2, int y2) {
 	if (x2 < x1) { int tmp = x2; x2 = x1, x1 = tmp; }
@@ -90,15 +90,15 @@ void Map::cRoom(bool first, int x1, int y1, int x2, int y2) {
 	dig(x1, y1, x2, y2);
 	int cx((x1 + x2) / 2), cy = ((y1 + y2) / 2);
 	if (first) {
-		engine.player->loc.x = cx;
-		engine.player->loc.y = cy;
+		engine.player->corporeal->loc.x = cx;
+		engine.player->corporeal->loc.y = cy;
 	}
 	else {
 		TCODRandom *rng = TCODRandom::getInstance();
 		int nbMonsters(rng->getInt(0, rMonstersMax));
 		while (nbMonsters > 0) {
 			coords loc((rng->getInt(x1, x2)), (rng->getInt(y1, y2)));
-			if (canWalk(loc)) { addMonster(loc); }
+			//if (canWalk(loc)) { addMonster(loc); }
 			nbMonsters--;
 		}
 		//if (rng->getInt(0, 3) == 0) { engine.entL.emplace_back(std::make_shared<Ent>(cx, cy, '@', "NPC", TCODColor::yellow)); }
@@ -118,12 +118,14 @@ bool Map::isInFov(int x, int y) const {
 }
 
 void Map::computeFov() {
-	map->computeFov(engine.player->loc.x, engine.player->loc.y, engine.fovRad);
+	map->computeFov(engine.player->corporeal->loc.x, engine.player->corporeal->loc.y, engine.fovRad);
 }
 
 bool Map::canWalk(coords loc) const {
 	if (isWall(loc.x, loc.y)) { return false; }
-	for (auto &ent : engine.entL) { if (ent->loc.x == loc.x && ent->loc.y == loc.y) { return false; } }
+	for (auto &ent : engine.entL) { 
+		if (ent->corporeal->loc.x == loc.x && ent->corporeal->loc.y == loc.y) { return false; } 
+	}
 	return true;
 }
 

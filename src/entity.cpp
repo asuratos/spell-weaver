@@ -1,28 +1,19 @@
 #include "main.hpp"
 
-coords coords::mod(int dx, int dy) {
-	return coords(x + dx, y + dy);
-}
-
-coords coords::mod(coords diff) {
-	return coords(x + diff.x, y + diff.y);
-}
-
 Corporeal::Corporeal(coords loc, bool blocks) : loc(loc), blocks(blocks) {}
 
 Corporeal::~Corporeal() {}
 
-Entity::Entity(int ch, std::string name, TCODColor &col, int type) : ch(ch), name(name), col(col), type(type) {}
+Entity::Entity(std::string name, entityType type) : name(name), type(type) {}
 
 Entity::~Entity() {}
 
-/*
-void Actor::update(std::shared_ptr<Actor> owner) { 
+
+void Entity::update(std::shared_ptr<Entity> owner) { 
 	if (ai) ai->update(owner);
-	else if (Pai) Pai->update(owner);
-
+	else if (input) input->process(owner);
 }
-
+/*
 void Actor::render() const {
 	TCODConsole::root->setChar(loc.x, loc.y, ch);
 	TCODConsole::root->setCharForeground(loc.x, loc.y, col); 

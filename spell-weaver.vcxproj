@@ -158,6 +158,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\map.cpp" />
     <ClCompile Include="src\mortal.cpp" />
+    <ClCompile Include="src\movement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ai.hpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="src\main.hpp" />
     <ClInclude Include="src\map.hpp" />
     <ClInclude Include="src\mortal.hpp" />
+    <ClInclude Include="src\movement.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

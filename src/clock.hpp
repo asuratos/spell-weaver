@@ -2,6 +2,8 @@
 
 class Clock {
 public:
+	int walkCost = 50;
+
 	void increment();
 	void decrement(int cost);
 
