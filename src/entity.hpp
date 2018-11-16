@@ -50,7 +50,6 @@ public:
 	
 
 	void update(std::shared_ptr<Entity> owner);
-	void render() const;
 	
 
 	Entity(std::string name, entityType type); ~Entity();
