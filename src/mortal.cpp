@@ -13,7 +13,7 @@ void Mortal::die(std::shared_ptr<Entity> owner) {
 	owner->disp->ch = '%';
 	owner->disp->col = TCODColor::darkRed;
 	owner->name = corpseName;
-	owner->corporeal->blocks = false;
+	owner->spatial->blocks = false;
 	owner->clock = nullptr;
 
 	if (owner->isPlayer) {

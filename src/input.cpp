@@ -26,7 +26,7 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 	}
 
 	if (tx != 0 || ty != 0) {
-		if (ent->ai->tryToMove(ent, ent->corporeal->loc.x + tx, ent->corporeal->loc.y + ty)) {
+		if (ent->ai->tryToMove(ent, ent->spatial->loc.x + tx, ent->spatial->loc.y + ty)) {
 			engine.dungeon->computeFov();
 		}
 	}

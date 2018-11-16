@@ -5,5 +5,6 @@ class MovementSystem {
 public:
 	MovementSystem(); ~MovementSystem();
 
-	bool move(std::shared_ptr<Entity>, coords targetloc);
+	bool isMoveValid(std::shared_ptr<Entity> ent, coords targetloc);
+	bool move(std::shared_ptr<Entity> ent, coords targetloc);
 };

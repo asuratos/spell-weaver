@@ -1,8 +1,8 @@
 #include "main.hpp"
 
-Corporeal::Corporeal(coords loc, bool blocks) : loc(loc), blocks(blocks) {}
+Spatial::Spatial(coords loc, bool blocks) : loc(loc), blocks(blocks) {}
 
-Corporeal::~Corporeal() {}
+Spatial::~Spatial() {}
 
 Entity::Entity(std::string name, entityType type) : name(name), type(type) {}
 

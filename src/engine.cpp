@@ -13,8 +13,8 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	
 	player->isPlayer = true;
 	player->ai = std::make_shared<PlayerAi>();
-	player->disp = std::make_shared<Display>('@', TCODColor::white);
-	player->corporeal = std::make_shared<Corporeal>(coords(1, 1), true);
+	player->disp = std::make_shared<DisplayComponent>('@', TCODColor::white);
+	player->spatial = std::make_shared<Spatial>(coords(1, 1), true);
 	player->mortal = std::make_shared<Mortal>(30, 2, "your lifeless corpse");
 	player->combat = std::make_shared<Combat>(5);
 	player->input = std::make_shared<InputHandler>();
@@ -60,7 +60,7 @@ void Engine::render() {
 	
 	for (auto &ent : entL) { 
 		if (ent->clock) { 
-			if (dungeon->isInFov(ent->corporeal->loc.x, ent->corporeal->loc.y)) { 
+			if (dungeon->isInFov(ent->spatial->loc.x, ent->spatial->loc.y)) { 
 				ent->disp->render(ent); 
 			} 
 		}
@@ -77,10 +77,10 @@ void Engine::render() {
 	*/
 	player->disp->render(player);
 
-	static std::stringstream hpDisplay;
+	static std::stringstream hpDisplayComponent;
 
-	hpDisplay.str(std::string());
-	hpDisplay << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
+	hpDisplayComponent.str(std::string());
+	hpDisplayComponent << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
 
-//	TCODConsole::root->print(1, sH - 2,  hpDisplay.str());
+//	TCODConsole::root->print(1, sH - 2,  hpDisplayComponent.str());
 }

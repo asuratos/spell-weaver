@@ -5,3 +5,8 @@ public:
 	void update();
 	void render();
 };
+
+class MagicSystem {
+public:
+
+};

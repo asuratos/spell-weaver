@@ -6,6 +6,12 @@ class Ai {
 public:
 //	bool friendly;
 	int faction;
+	enum Mode {
+		CONTROLLED,
+		ASLEEP,
+		HUNTING,
+		AFRAID
+	};
 
 	~Ai();
 
@@ -26,7 +32,7 @@ class MeleeAi : public Ai {
 public:
 	int moveCount;
 
-	MeleeAi();
+	MeleeAi(Ai::Mode mode);
 
 	void update(std::shared_ptr<Entity> owner);
 	bool tryToMove(std::shared_ptr<Entity> owner, int tx, int ty);

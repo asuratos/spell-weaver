@@ -17,12 +17,12 @@ struct coords {
 
 
 //small components
-class Corporeal {
+class Spatial {
 public:
 	coords loc;
 	bool blocks;
 
-	Corporeal(coords loc, bool blocks); ~Corporeal();
+	Spatial(coords loc, bool blocks); ~Spatial();
 };
 
 
@@ -39,12 +39,11 @@ public:
 	bool isPlayer;
 
 	//pointers to components go here
-	std::shared_ptr<Corporeal> corporeal = nullptr;
-	std::shared_ptr<Display> disp = nullptr;
+	std::shared_ptr<Spatial> spatial = nullptr;
+	std::shared_ptr<DisplayComponent> disp = nullptr;
 	std::shared_ptr<Clock> clock = nullptr;
 	std::shared_ptr<Mortal> mortal = nullptr;
 	std::shared_ptr<Combat> combat = nullptr;
-
 	std::shared_ptr<InputHandler> input = nullptr;
 	std::shared_ptr<Ai> ai = nullptr;
 	
