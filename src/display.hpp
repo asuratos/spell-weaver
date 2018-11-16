@@ -7,7 +7,8 @@ public:
 	int ch;
 	TCODColor col;
 
-	Display(int ch, TCODColor &col); ~Display();
+	Display(int ch, TCODColor col);
+	~Display();
 
 	void render(std::shared_ptr<Entity> owner);
 };

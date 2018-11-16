@@ -18,15 +18,15 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 		case 'z': break;
 		}
 		break;
-	case TCODK_UP: ty = 1; break;
-	case TCODK_DOWN: ty = -1; break;
+	case TCODK_UP: ty = -1; break;
+	case TCODK_DOWN: ty = 1; break;
 	case TCODK_LEFT: tx = -1; break;
 	case TCODK_RIGHT: tx = 1; break;
 	default: break;
 	}
 
 	if (tx != 0 || ty != 0) {
-		if (ent->Pai->moveOrAttack(ent, ent->corporeal->loc.x + tx, ent->corporeal->loc.y + ty)) {
+		if (ent->ai->tryToMove(ent, ent->corporeal->loc.x + tx, ent->corporeal->loc.y + ty)) {
 			engine.dungeon->computeFov();
 		}
 	}

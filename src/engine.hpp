@@ -3,6 +3,7 @@ public:
 	std::vector<std::shared_ptr<Entity>> entL;
 	std::unique_ptr<Map> dungeon;
 	std::unique_ptr<MovementSystem> Mover;
+	std::shared_ptr<Entity> player;
 
 	enum gameState {
 		START,
@@ -14,8 +15,6 @@ public:
 	int fovRad, sW, sH;
 
 	TCOD_key_t lastKey;
-
-	std::shared_ptr<Entity> player;
 
 	Engine(int sW, int sH); ~Engine();
 

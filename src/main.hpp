@@ -12,8 +12,7 @@
 
 #include "libtcod.hpp"
 
-class Ent;
-class Actor;
+class Entity;
 
 #include "mortal.hpp"
 #include "display.hpp"

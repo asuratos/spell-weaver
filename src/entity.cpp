@@ -11,7 +11,6 @@ Entity::~Entity() {}
 
 void Entity::update(std::shared_ptr<Entity> owner) { 
 	if (ai) ai->update(owner);
-	else if (input) input->process(owner);
 }
 /*
 void Actor::render() const {

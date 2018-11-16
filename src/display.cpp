@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-Display::Display(int ch, TCODColor &col) : ch(ch), col(col) {}
+Display::Display(int ch, TCODColor col) : ch(ch), col(col) {}
 
 Display::~Display() {}
 

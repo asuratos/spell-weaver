@@ -1,8 +1,9 @@
 #include "main.hpp"
 
-Engine engine(80,50);
+Engine engine(80, 50);
 
 int main() {
+
 	while (!TCODConsole::isWindowClosed()) {
 		engine.update();
 		engine.render();

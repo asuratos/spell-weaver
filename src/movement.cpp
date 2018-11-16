@@ -22,9 +22,13 @@ bool MovementSystem::move(std::shared_ptr<Entity> owner, coords targetloc) {
 				}
 				else {
 					owner->clock->decrement(owner->clock->walkCost);
-					return false;
+					return true;
 				}
 			}
 		}
 	}
+
+	owner->corporeal->loc = targetloc;
+	owner->clock->decrement(owner->clock->walkCost);
+	return true;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-class Spell : public Ent{
+class Spell : public Entity{
 public:
 	void update();
 	void render();
