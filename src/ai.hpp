@@ -13,7 +13,9 @@ public:
 		AFRAID
 	};
 
-	~Ai();
+	Mode aimode = HUNTING;
+
+	Ai();  Ai(Mode mode);  ~Ai();
 
 	virtual void update(std::shared_ptr<Entity> owner) = 0;
 	virtual bool tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) = 0;
@@ -21,10 +23,11 @@ public:
 
 class PlayerAi : public Ai {
 public:
+	int faction = 0;
 
 	PlayerAi(); ~PlayerAi();
 
-	virtual void update(std::shared_ptr<Entity> owner);
+	void update(std::shared_ptr<Entity> owner);
 	bool tryToMove(std::shared_ptr<Entity> owner,  int tx,  int ty);
 };
 
@@ -32,7 +35,7 @@ class MeleeAi : public Ai {
 public:
 	int moveCount;
 
-	MeleeAi(Ai::Mode mode);
+	MeleeAi(Ai::Mode mode);// : Ai(mode);
 
 	void update(std::shared_ptr<Entity> owner);
 	bool tryToMove(std::shared_ptr<Entity> owner, int tx, int ty);

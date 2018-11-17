@@ -19,7 +19,7 @@ public:
 	bool isWall(int x, int y) const;
 	bool canWalk(coords loc) const;
 	
-	//void addMonster(coords loc);
+	void addMonster(coords loc);
 	void computeFov();
 	void render() const;
 

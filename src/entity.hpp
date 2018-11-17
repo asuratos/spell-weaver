@@ -36,7 +36,7 @@ public:
 
 	entityType type = ACTOR;
 	std::string name;
-	bool isPlayer;
+	bool isPlayer = false;
 
 	//pointers to components go here
 	std::shared_ptr<Spatial> spatial = nullptr;

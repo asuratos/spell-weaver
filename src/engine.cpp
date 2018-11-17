@@ -9,7 +9,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	TCODConsole::initRoot(sW, sH, "libtcodtutsv0.6", false);
 
 	
-	player = std::make_shared<Entity>(std::string("player"), Entity::ACTOR);
+	player = std::make_shared<Entity>("player", Entity::ACTOR);
 	
 	player->isPlayer = true;
 	player->ai = std::make_shared<PlayerAi>();
@@ -59,28 +59,20 @@ void Engine::render() {
 	dungeon->render();
 	
 	for (auto &ent : entL) { 
-		if (ent->clock) { 
+		if (ent->disp && !ent->isPlayer) { 
 			if (dungeon->isInFov(ent->spatial->loc.x, ent->spatial->loc.y)) { 
 				ent->disp->render(ent); 
 			} 
 		}
 	}
-	/*
-	for (auto &ent : entL) { 
-		if (ent->mortal) { 
-			if (!ent->mortal->isDead()) { 
-				if (dungeon->isInFov(ent->loc.x, ent->loc.y)) { 
-					ent->render(); } 
-			}
-		}
-	}
-	*/
+
 	player->disp->render(player);
 
-	static std::stringstream hpDisplayComponent;
+	//static std::stringstream hpDisplayComponent;
 
-	hpDisplayComponent.str(std::string());
-	hpDisplayComponent << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
+	//hpDisplayComponent.str(std::string(""));
+	//hpDisplayComponent << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
+	std::string hpdisplay = std::string("HP : ") + std::to_string(player->mortal->hp) + std::string("/") + std::to_string(player->mortal->MaxHp);
 
-//	TCODConsole::root->print(1, sH - 2,  hpDisplayComponent.str());
+	TCODConsole::root->printf(1, sH - 2, hpdisplay.c_str());// hpDisplayComponent.str());
 }

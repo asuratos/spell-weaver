@@ -47,7 +47,7 @@ Map::Map(int w, int h) : w(w), h(h) {
 	
 }
 
-/*
+
 void Map::addMonster(coords loc) {
 	std::random_device seed;
 	std::default_random_engine dRoll(seed());
@@ -57,23 +57,29 @@ void Map::addMonster(coords loc) {
 	
 	int mDice(dice());
 	if (mDice < 80) {
-		std::shared_ptr<Actor> gromlin = std::make_shared<Actor>(loc, 'g', "Gromlin", TCODColor::desaturatedGreen);
-		gromlin->mortal = std::make_shared<npcMortal>(10, 0, "dead gromlin");
+		std::shared_ptr<Entity> gromlin = std::make_shared<Entity>("Gromlin", Entity::ACTOR);
+
+		gromlin->spatial = std::make_shared<Spatial>(loc, true);
+		gromlin->disp = std::make_shared<DisplayComponent>('g', TCODColor::desaturatedGreen);
+		gromlin->mortal = std::make_shared<Mortal>(10, 0, "dead gromlin");
 		gromlin->combat = std::make_shared<Combat>(3);
-		gromlin->ai = std::make_shared<MobAi>();
-		gromlin->clock = std::make_shared<Clock>(15);
+		gromlin->ai = std::make_shared<MeleeAi>(Ai::HUNTING);
+		gromlin->clock = std::make_shared<Clock>(10);
 		engine.entL.push_back(gromlin);
 	}
 	else {
-		std::shared_ptr<Actor> hobgobbo = std::make_shared<Actor>(loc, 'h', "Hobgobbo", TCODColor::darkOrange);
-		hobgobbo->mortal = std::make_shared<npcMortal>(16, 1, "dead hobgobbo");
+		std::shared_ptr<Entity> hobgobbo = std::make_shared<Entity>("Hobgobbo", Entity::ACTOR);
+
+		hobgobbo->spatial = std::make_shared<Spatial>(loc, true);
+		hobgobbo->disp = std::make_shared<DisplayComponent>('h', TCODColor::darkOrange);
+		hobgobbo->mortal = std::make_shared<Mortal>(16, 1, "dead hobgobbo");
 		hobgobbo->combat = std::make_shared<Combat>(4);
-		hobgobbo->ai = std::make_shared<MobAi>();
+		hobgobbo->ai = std::make_shared<MeleeAi>(Ai::HUNTING);
 		hobgobbo->clock = std::make_shared<Clock>(5);
 		engine.entL.push_back(hobgobbo);
 	}
 
-}*/
+}
 
 void Map::dig(int x1, int y1, int x2, int y2) {
 	if (x2 < x1) { int tmp = x2; x2 = x1, x1 = tmp; }
@@ -98,7 +104,7 @@ void Map::cRoom(bool first, int x1, int y1, int x2, int y2) {
 		int nbMonsters(rng->getInt(0, rMonstersMax));
 		while (nbMonsters > 0) {
 			coords loc((rng->getInt(x1, x2)), (rng->getInt(y1, y2)));
-			//if (canWalk(loc)) { addMonster(loc); }
+			if (canWalk(loc)) { addMonster(loc); }
 			nbMonsters--;
 		}
 		//if (rng->getInt(0, 3) == 0) { engine.entL.emplace_back(std::make_shared<Ent>(cx, cy, '@', "NPC", TCODColor::yellow)); }

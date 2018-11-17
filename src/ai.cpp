@@ -2,6 +2,9 @@
 
 Ai::~Ai() {}
 
+Ai::Ai() {}
+Ai::Ai(Ai::Mode aimode) : aimode(aimode), faction(1) {}
+
 PlayerAi::PlayerAi() {}
 
 PlayerAi::~PlayerAi() {}
@@ -11,7 +14,6 @@ void PlayerAi::update(std::shared_ptr<Entity> owner){
 		if (owner->mortal->isDead()) {
 			return;
 		}
-
 
 		owner->input->process(owner);
 	}
@@ -27,8 +29,9 @@ bool PlayerAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
 			if (!ent->mortal->isDead() && (ent->ai->faction != owner->ai->faction)  && ent->spatial->loc.x == tx && ent->spatial->loc.y==ty) {
 				//attack the thing
 				owner->combat->attack(owner, ent);
+				owner->clock->decrement(owner->clock->walkCost);
+				return false;
 			}
-		
 			else if (ent->mortal->isDead() && ent->spatial->loc.x == tx && ent->spatial->loc.y == ty) {
 				std::cout << "A " << ent->mortal->corpseName << " lies here." << std::endl;
 			}
@@ -42,15 +45,20 @@ bool PlayerAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
 
 static const int TRACK_TURNS(3);
 
-MeleeAi::MeleeAi(Ai::Mode mode) {}
+MeleeAi::MeleeAi(Ai::Mode mode) : Ai(mode) {}
 
 void MeleeAi::update(std::shared_ptr<Entity> owner) {
 	//mob decision making here
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) { return; }
 	}
-	if (engine.dungeon->isInFov(owner->spatial->loc.x, owner->spatial->loc.y)) { moveCount = TRACK_TURNS; }
-	else { moveCount++; }
+	if (engine.dungeon->isInFov(owner->spatial->loc.x, owner->spatial->loc.y)) { 
+		moveCount = TRACK_TURNS; 
+	}
+	else { 
+		moveCount++; 
+		owner->clock->decrement(owner->clock->walkCost);
+	}
 	if (moveCount > 0) { tryToMove(owner, engine.player->spatial->loc.x, engine.player->spatial->loc.y); }
 }
 
@@ -68,10 +76,12 @@ bool MeleeAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
 		else if (engine.dungeon->canWalk(coords(owner->spatial->loc.x, owner->spatial->loc.y + sdy))) {
 			owner->spatial->loc.y += sdy;
 		}
+		owner->clock->decrement(owner->clock->walkCost);
 		return true;
 	}
 	else if (owner->combat) {
 		owner->combat->attack(owner, engine.player);
+		owner->clock->decrement(owner->clock->walkCost);
 		return false;
 	}
 

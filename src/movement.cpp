@@ -5,7 +5,7 @@ MovementSystem::MovementSystem() {}
 MovementSystem::~MovementSystem() {}
 
 bool MovementSystem::isMoveValid(std::shared_ptr<Entity> ent, coords targetloc) {
-
+	return true;
 }
 
 bool MovementSystem::move(std::shared_ptr<Entity> owner, coords targetloc) {
