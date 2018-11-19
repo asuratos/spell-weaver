@@ -40,7 +40,7 @@ Map::Map(int w, int h) : w(w), h(h) {
 	map = std::make_shared<TCODMap>(w, h);
 
 	TCODBsp bsp(0, 0, w, h);
-	bsp.splitRecursive(NULL, 8, rsMax, rsMax, 1.5f, 1.5f);
+	bsp.splitRecursive(NULL, 8, rsMax, rsMax, 2.0f, 2.0f);
 	bspList listener(*this);
 	bsp.traverseInvertedLevelOrder(&listener, NULL);
 

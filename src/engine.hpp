@@ -5,6 +5,8 @@ public:
 	std::unique_ptr<MovementSystem> Mover;
 	std::shared_ptr<Entity> player;
 
+	std::string hpdisplay;
+
 	enum gameState {
 		START,
 		GAME,

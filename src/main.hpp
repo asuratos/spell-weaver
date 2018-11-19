@@ -6,8 +6,6 @@
 #include <functional>
 #include <string>
 #include <iostream>
-#include <sstream>
-#include <iomanip>
 #include <map>
 
 #include "libtcod.hpp"

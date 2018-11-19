@@ -153,6 +153,7 @@
     <ClCompile Include="src\display.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\magic.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="src\display.hpp" />
     <ClInclude Include="src\engine.hpp" />
     <ClInclude Include="src\entity.hpp" />
+    <ClInclude Include="src\gui.hpp" />
     <ClInclude Include="src\input.hpp" />
     <ClInclude Include="src\magic.hpp" />
     <ClInclude Include="src\main.hpp" />

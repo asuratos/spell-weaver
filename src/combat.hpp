@@ -2,9 +2,9 @@
 
 class Combat {
 public:
-	float atk;
+	int atk;
 
-	Combat(float atk);
+	Combat(int atk);
 
 	void attack(std::shared_ptr<Entity> attacker, std::shared_ptr<Entity> target);
 };
