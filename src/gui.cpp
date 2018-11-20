@@ -36,6 +36,9 @@ void Gui::render() {
 
 void Gui::message(std::string message, const TCODColor &col) {
 	log.emplace_back(std::make_shared<Message>(message, col));
+	if (log.size() == 30) {
+		log.erase(log.begin());
+	}
 }
 
 Gui::Message::Message(std::string message, const TCODColor &col) : message(message), col(col) {}

@@ -15,7 +15,11 @@ void Mortal::die(std::shared_ptr<Entity> owner) {
 		engine.gameState = Engine::LOSE;
 	}
 	else {
-		std::cout << "The " << owner->name << " has been slain." << std::endl;
+		engine.gui->message(
+			"The " + owner->name + "has been slain.",
+			TCODColor::lightBlue
+		);
+		//std::cout << "The " << owner->name << " has been slain." << std::endl;
 	}
 
 	owner->disp->ch = '%';
