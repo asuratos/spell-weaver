@@ -33,7 +33,7 @@ bool PlayerAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
 				return false;
 			}
 			else if (ent->mortal->isDead() && ent->spatial->loc.x == tx && ent->spatial->loc.y == ty) {
-				std::cout << "A " << ent->mortal->corpseName << " lies here." << std::endl;
+				engine.gui->message(std::string("A ") + ent->mortal->corpseName + std::string(" lies here."), TCODColor::white);
 			}
 		}
 	}

@@ -4,6 +4,7 @@ public:
 	std::unique_ptr<Map> dungeon;
 	std::unique_ptr<MovementSystem> Mover;
 	std::shared_ptr<Entity> player;
+	std::unique_ptr<Gui> gui;
 
 	std::string hpdisplay;
 
@@ -15,6 +16,7 @@ public:
 	}gameState;
 
 	int fovRad, sW, sH;
+	int guiheight = 12;
 
 	TCOD_key_t lastKey;
 

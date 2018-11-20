@@ -29,5 +29,6 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 		if (ent->ai->tryToMove(ent, ent->spatial->loc.x + tx, ent->spatial->loc.y + ty)) {
 			engine.dungeon->computeFov();
 		}
+		//engine.gui->message(std::string("Step"), TCODColor::white);
 	}
 }

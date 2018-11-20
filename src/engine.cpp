@@ -23,7 +23,8 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	entL.push_back(player);
 
 	Mover = std::make_unique<MovementSystem>();
-	dungeon = std::make_unique<Map>(sW, sH-12);
+	gui = std::make_unique<Gui>(guiheight);
+	dungeon = std::make_unique<Map>(sW, sH-guiheight);
 }
 
 Engine::~Engine() { entL.clear(); }
@@ -67,19 +68,17 @@ void Engine::render() {
 	}
 
 	player->disp->render(player);
+	gui->render();
 
-
-	TCODConsole::root->printFrame(0, sH - 12, 15, 12);
-	TCODConsole::root->printFrame(15, sH - 12, sW-15, 12);
 
 	//static std::stringstream hpDisplayComponent;
 
 	//hpDisplayComponent.str(std::string(""));
 	//hpDisplayComponent << std::setprecision(0) << "HP : " << player->mortal->hp << "/" << player->mortal->MaxHp;
-	hpdisplay = std::string("HP: ") + std::to_string(player->mortal->hp) + std::string("/") + std::to_string(player->mortal->MaxHp);
+	//hpdisplay = std::string("HP: ") + std::to_string(player->mortal->hp) + std::string("/") + std::to_string(player->mortal->MaxHp);
 
-	TCODConsole::root->printf(1, sH - 11, hpdisplay.c_str());
-	TCODConsole::root->printf(16, sH - 11, "This is a string display test");
+	//TCODConsole::root->printf(1, sH - 11, hpdisplay.c_str());
+	//TCODConsole::root->printf(16, sH - 11, "This is a string display test");
 
 	//not working string code
 	//TCODConsole::root->print(1, sH - 11, hpdisplay);

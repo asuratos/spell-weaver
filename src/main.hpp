@@ -21,5 +21,6 @@ class Entity;
 #include "entity.hpp"
 #include "map.hpp"
 #include "magic.hpp"
+#include "gui.hpp"
 #include "movement.hpp"
 #include "engine.hpp"
