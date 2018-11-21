@@ -13,9 +13,9 @@ public:
 
 	Caster(); ~Caster();
 
-	void channel(Element elem, std::shared_ptr<Entity> owner);
+	void channel(Element elem, const std::shared_ptr<Entity> &owner);
 
 	std::string getWeaves();
 
-	void release(std::shared_ptr<Entity> owner);
+	void release();
 };

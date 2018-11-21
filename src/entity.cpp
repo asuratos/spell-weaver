@@ -9,7 +9,7 @@ Entity::Entity(std::string name, entityType type) : name(name), type(type) {}
 Entity::~Entity() {}
 
 
-void Entity::update(std::shared_ptr<Entity> owner) { 
+void Entity::update(const std::shared_ptr<Entity>& owner) { 
 	if (ai) ai->update(owner);
 }
 /*

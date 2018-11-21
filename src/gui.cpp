@@ -18,7 +18,7 @@ void Gui::render() {
 	//HP Bar
 	renderBar(1, 1, 12, "HP", (float)engine.player->mortal->hp, (float)engine.player->mortal->MaxHp, TCODColor::darkerRed, TCODColor::lightRed);
 
-	//spell cache
+	//render spell cache
 	con->print(1, 2, std::string("[ ][ ][ ]"));
 
 	//render messages in log

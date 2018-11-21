@@ -9,7 +9,7 @@ public:
 
 	bool isDead() { return hp <= 0; }
 
-	int takeDamage(std::shared_ptr<Entity> owner, int dmg);
+	int takeDamage(const std::shared_ptr<Entity>& owner, int dmg);
 
-	void die(std::shared_ptr<Entity> owner);
+	void die(const std::shared_ptr<Entity>& owner);
 };

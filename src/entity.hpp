@@ -49,7 +49,7 @@ public:
 	std::shared_ptr<Caster> caster = nullptr;
 	
 
-	void update(std::shared_ptr<Entity> owner);
+	void update(const std::shared_ptr<Entity>& owner);
 	
 
 	Entity(std::string name, entityType type); ~Entity();

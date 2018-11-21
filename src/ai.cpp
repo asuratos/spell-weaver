@@ -9,17 +9,17 @@ PlayerAi::PlayerAi() {}
 
 PlayerAi::~PlayerAi() {}
 
-void PlayerAi::update(std::shared_ptr<Entity> owner){
+void PlayerAi::update(const std::shared_ptr<Entity>& owner){
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) {
 			return;
 		}
 
-		owner->input->process(owner);
+		owner->input->takeTurn(owner);
 	}
 }
 
-bool PlayerAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
+bool PlayerAi::tryToMove(const std::shared_ptr<Entity>& owner, int tx, int ty) {
 	if (engine.dungeon->isWall(tx, ty)) {
 		owner->clock->decrement(owner->clock->walkCost);
 		return false;
@@ -47,7 +47,7 @@ static const int TRACK_TURNS(3);
 
 MeleeAi::MeleeAi(Ai::Mode mode) : Ai(mode) {}
 
-void MeleeAi::update(std::shared_ptr<Entity> owner) {
+void MeleeAi::update(const std::shared_ptr<Entity>& owner) {
 	//mob decision making here
 	if (owner->mortal) {
 		if (owner->mortal->isDead()) { return; }
@@ -62,7 +62,7 @@ void MeleeAi::update(std::shared_ptr<Entity> owner) {
 	if (moveCount > 0) { tryToMove(owner, engine.player->spatial->loc.x, engine.player->spatial->loc.y); }
 }
 
-bool MeleeAi::tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) {
+bool MeleeAi::tryToMove(const std::shared_ptr<Entity>& owner, int tx, int ty) {
 	//mob pathing should be here
 	int dx(tx - owner->spatial->loc.x), dy(ty - owner->spatial->loc.y), sdx(dx > 0 ? 1 : -1), sdy(dy > 0 ? 1 : -1), distance((int)sqrt(dx*dx + dy * dy));
 	if (distance >= 2) {

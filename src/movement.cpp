@@ -4,11 +4,11 @@ MovementSystem::MovementSystem() {}
 
 MovementSystem::~MovementSystem() {}
 
-bool MovementSystem::isMoveValid(std::shared_ptr<Entity> ent, coords targetloc) {
+bool MovementSystem::isMoveValid(const std::shared_ptr<Entity>& ent, coords targetloc) {
 	return true;
 }
 
-bool MovementSystem::move(std::shared_ptr<Entity> owner, coords targetloc) {
+bool MovementSystem::move(const std::shared_ptr<Entity>& owner, coords targetloc) {
 	if (engine.dungeon->isWall(targetloc.x, targetloc.y)) {
 		owner->clock->decrement(owner->clock->walkCost);
 		return false;

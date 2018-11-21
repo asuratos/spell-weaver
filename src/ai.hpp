@@ -17,8 +17,8 @@ public:
 
 	Ai();  Ai(Mode mode);  ~Ai();
 
-	virtual void update(std::shared_ptr<Entity> owner) = 0;
-	virtual bool tryToMove(std::shared_ptr<Entity> owner, int tx, int ty) = 0;
+	virtual void update(const std::shared_ptr<Entity> &owner) = 0;
+	virtual bool tryToMove(const std::shared_ptr<Entity>& owner, int tx, int ty) = 0;
 };
 
 class PlayerAi : public Ai {
@@ -27,8 +27,8 @@ public:
 
 	PlayerAi(); ~PlayerAi();
 
-	void update(std::shared_ptr<Entity> owner);
-	bool tryToMove(std::shared_ptr<Entity> owner,  int tx,  int ty);
+	void update(const std::shared_ptr<Entity>& owner);
+	bool tryToMove(const std::shared_ptr<Entity>& owner,  int tx,  int ty);
 };
 
 class MeleeAi : public Ai {
@@ -37,7 +37,7 @@ public:
 
 	MeleeAi(Ai::Mode mode);// : Ai(mode);
 
-	void update(std::shared_ptr<Entity> owner);
-	bool tryToMove(std::shared_ptr<Entity> owner, int tx, int ty);
+	void update(const std::shared_ptr<Entity>& owner);
+	bool tryToMove(const std::shared_ptr<Entity>& owner, int tx, int ty);
 
 };

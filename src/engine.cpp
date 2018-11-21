@@ -44,11 +44,15 @@ void Engine::update() {
 						ent->clock->increment();
 					}
 					if (ent->clock->isReady()) {
+						//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
 						ent->update(ent);
 					}
 				}
 			}
 		}
+	}
+	else if (gameState == LOSE) {
+		std::cout << "Game Over" << std::endl;
 	}
 	if (computeFov) {
 		dungeon->computeFov();

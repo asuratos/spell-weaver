@@ -4,7 +4,7 @@ Caster::Caster() : castingCost{ 50, 50, 50, 50, 50 } {}
 
 Caster::~Caster() {}
 
-void Caster::channel(Caster::Element elem, std::shared_ptr<Entity> owner) {
+void Caster::channel(Caster::Element elem, const std::shared_ptr<Entity> &owner) {
 	if (weaves.size() >= 3) {
 		engine.gui->message("You cannot hold any more of the One Power!", TCODColor::lightRed);
 		return;
@@ -54,11 +54,8 @@ void Caster::channel(Caster::Element elem, std::shared_ptr<Entity> owner) {
 	weaves = weaves + new_weave;
 }
 
-void Caster::release(std::shared_ptr<Entity> owner) {
+void Caster::release() {
 	weaves.clear();
-	if (owner->isPlayer) {
-		engine.gui->message("You release the One Power.", TCODColor::white);
-	}
 }
 
 

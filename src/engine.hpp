@@ -5,6 +5,7 @@ public:
 	std::unique_ptr<MovementSystem> Mover;
 	std::shared_ptr<Entity> player;
 	std::unique_ptr<Gui> gui;
+	std::unique_ptr<MagicSystem> Magic;
 
 	std::string hpdisplay;
 

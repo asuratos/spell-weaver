@@ -6,5 +6,5 @@ public:
 
 	Combat(int atk);
 
-	void attack(std::shared_ptr<Entity> attacker, std::shared_ptr<Entity> target);
+	void attack(const std::shared_ptr<Entity>& attacker, const std::shared_ptr<Entity>& target);
 };

@@ -1,10 +1,10 @@
 #include "main.hpp"
 
-DisplayComponent::DisplayComponent(int ch, TCODColor col) : ch(ch), col(col) {}
+DisplayComponent::DisplayComponent(int ch, const TCODColor &col) : ch(ch), col(col) {}
 
 DisplayComponent::~DisplayComponent() {}
 
-void DisplayComponent::render(std::shared_ptr<Entity> owner) {
+void DisplayComponent::render(const std::shared_ptr<Entity> &owner) {
 	switch (owner->type) {
 	case Entity::ACTOR:
 		TCODConsole::root->setChar(owner->spatial->loc.x, owner->spatial->loc.y, ch);
