@@ -15,9 +15,9 @@ void Gui::render() {
 	con->printFrame(0, 0, 15, h);
 	con->printFrame(15, 0, engine.sW - 15, h);
 
-	//render HP bar
-	Gui::Message msg = Gui::Message(std::string("blah"), TCODColor::black);
-	msg.col;
+	renderBar(1, 1, 13, "HP", (float)engine.player->mortal->hp, (float)engine.player->mortal->MaxHp, TCODColor::darkerRed, TCODColor::lightRed);
+
+
 	//render messages in log
 	
 	int lineno = 1; float opac = 1.0f;
@@ -32,6 +32,25 @@ void Gui::render() {
 	}
 
 	TCODConsole::blit(con, 0, 0, engine.sW, h, TCODConsole::root, 0, engine.sH - h);
+}
+
+void Gui::renderBar(int x, int y, int width, std::string label, float val, float maxVal, const TCODColor &back, const TCODColor &fore) {
+	//render HP bar (Encapsulate this later)
+//first print the rectangle
+	con->setDefaultBackground(back);
+	con->rect(x, y, width, 1, false, TCOD_BKGND_SET);
+
+	int barwidth = (int)(val / maxVal * width);
+	if (barwidth > 0) {
+		con->setDefaultBackground(fore);
+		con->rect(x, y, barwidth, 1, false, TCOD_BKGND_SET);
+	}
+
+	//next, display HP amount
+	con->setDefaultForeground(TCODColor::white);
+	con->print(x + width / 2, y,
+		"HP : " + std::to_string((int)val) + "/" + std::to_string((int)maxVal),
+		TCOD_CENTER, TCOD_BKGND_NONE);
 }
 
 void Gui::message(std::string message, const TCODColor &col) {

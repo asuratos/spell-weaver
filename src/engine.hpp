@@ -14,7 +14,7 @@ public:
 		WIN,
 		LOSE
 	}gameState;
-
+	
 	int fovRad, sW, sH;
 	int guiheight = 12;
 

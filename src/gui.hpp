@@ -24,5 +24,14 @@ protected:
 
 	std::vector<std::shared_ptr<Message>> log;
 
+	void renderBar(int x, int y, int w, std::string label,
+		float val, float maxVal,
+		const TCODColor &back,
+		const TCODColor &fore);
+
+	void renderBar(int x, int y, int w, std::string label,
+		const TCODColor &back,
+		const TCODColor &fore);
+
 
 };
