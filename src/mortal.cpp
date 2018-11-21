@@ -11,7 +11,8 @@ int Mortal::takeDamage(std::shared_ptr<Entity> owner, int dmg) {
 
 void Mortal::die(std::shared_ptr<Entity> owner) {
 	if (owner->isPlayer) {
-		std::cout << "You have been slain..." << std::endl;
+		engine.gui->message("You have been slain...", TCODColor::darkRed);
+		//std::cout << "You have been slain..." << std::endl;
 		engine.gameState = Engine::LOSE;
 	}
 	else {

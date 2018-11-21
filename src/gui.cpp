@@ -12,18 +12,20 @@ void Gui::render() {
 
 	//draw boxes
 	con->setDefaultForeground(TCODColor::white);
-	con->printFrame(0, 0, 15, h);
-	con->printFrame(15, 0, engine.sW - 15, h);
+	con->printFrame(0, 0, 14, h);
+	con->printFrame(14, 0, engine.sW - 14, h);
 
-	renderBar(1, 1, 13, "HP", (float)engine.player->mortal->hp, (float)engine.player->mortal->MaxHp, TCODColor::darkerRed, TCODColor::lightRed);
+	//HP Bar
+	renderBar(1, 1, 12, "HP", (float)engine.player->mortal->hp, (float)engine.player->mortal->MaxHp, TCODColor::darkerRed, TCODColor::lightRed);
 
+	//spell cache
+	con->print(1, 2, std::string("[ ][ ][ ]"));
 
 	//render messages in log
-	
 	int lineno = 1; float opac = 1.0f;
 	for (std::vector<std::shared_ptr<Gui::Message>>::reverse_iterator i = log.rbegin(); i != log.rend() ; i++) {
 		con->setDefaultForeground((*i)->col * opac);
-		con->TCODConsole::printf(16, lineno, (*i)->message.c_str());		
+		con->TCODConsole::print(15, lineno, (*i)->message);		
 		if (lineno == h - 2) {
 			break;
 		}

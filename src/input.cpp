@@ -15,6 +15,13 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 		case 'j': ty = 1; break;
 		case 'h': tx = -1; break;
 		case 'l': tx = 1; break;
+
+		case 'q': ent->caster->channel(Caster::FIRE, ent); break;
+		case 'w': ent->caster->channel(Caster::EARTH, ent); break;
+		case 'a': ent->caster->channel(Caster::AIR, ent); break;
+		case 's': ent->caster->channel(Caster::WATER, ent); break;
+		case 'd': ent->caster->channel(Caster::SPIRIT, ent); break;
+		case 'e': ent->caster->release(ent); break;
 		case 'z': break;
 		}
 		break;

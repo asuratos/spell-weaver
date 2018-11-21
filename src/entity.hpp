@@ -46,6 +46,7 @@ public:
 	std::shared_ptr<Combat> combat = nullptr;
 	std::shared_ptr<InputHandler> input = nullptr;
 	std::shared_ptr<Ai> ai = nullptr;
+	std::shared_ptr<Caster> caster = nullptr;
 	
 
 	void update(std::shared_ptr<Entity> owner);

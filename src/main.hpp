@@ -18,6 +18,7 @@ class Entity;
 #include "ai.hpp"
 #include "input.hpp"
 #include "clock.hpp"
+#include "caster.hpp"
 #include "entity.hpp"
 #include "map.hpp"
 #include "magic.hpp"

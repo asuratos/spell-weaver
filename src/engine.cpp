@@ -19,6 +19,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 	player->combat = std::make_shared<Combat>(5);
 	player->input = std::make_shared<InputHandler>();
 	player->clock = std::make_shared<Clock>(10);
+	player->caster = std::make_shared<Caster>();
 
 	entL.push_back(player);
 
