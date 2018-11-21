@@ -14,6 +14,6 @@ public:
 	Clock(int speed); ~Clock();
 protected:
 	int speed;
-	int energy = 100;
+	int energy = 0;
 	int e_thresh = 100;
 };

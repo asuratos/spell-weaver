@@ -17,5 +17,5 @@ int Clock::getEnergy() {
 }
 
 bool Clock::isReady() {
-	return (energy > e_thresh);
+	return (energy >= e_thresh);
 }

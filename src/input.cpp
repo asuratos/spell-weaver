@@ -20,8 +20,8 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 		case 'w': ent->caster->channel(Caster::EARTH, ent); break;
 		case 'a': ent->caster->channel(Caster::AIR, ent); break;
 		case 's': ent->caster->channel(Caster::WATER, ent); break;
-		case 'd': ent->caster->channel(Caster::SPIRIT, ent); break;
-		case 'e': ent->caster->release(ent); break;
+		case 'e': ent->caster->channel(Caster::SPIRIT, ent); break;
+		case 'd': ent->caster->release(ent); break;
 		case 'z': break;
 		}
 		break;
@@ -29,7 +29,7 @@ void InputHandler::process(std::shared_ptr<Entity> ent){
 	case TCODK_DOWN: ty = 1; break;
 	case TCODK_LEFT: tx = -1; break;
 	case TCODK_RIGHT: tx = 1; break;
-	default: break;
+	//default: break;
 	}
 
 	if (tx != 0 || ty != 0) {

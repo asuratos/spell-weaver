@@ -39,8 +39,10 @@ void Engine::update() {
 	if (gameState == GAME){
 		for (auto &ent : entL) {
 			if (ent->clock) {
-				if (!ent->mortal->isDead()) { 
-					ent->clock->increment();
+				if (!ent->mortal->isDead()) {
+					if (!ent->clock->isReady()) {
+						ent->clock->increment();
+					}
 					if (ent->clock->isReady()) {
 						ent->update(ent);
 					}
