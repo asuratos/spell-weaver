@@ -40,12 +40,14 @@ void Engine::update() {
 		for (auto &ent : entL) {
 			if (ent->clock) {
 				if (!ent->mortal->isDead()) {
-					if (!ent->clock->isReady()) {
-						ent->clock->increment();
-					}
-					if (ent->clock->isReady()) {
-						//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
-						ent->update(ent);
+					if (ent->ai) {
+						if (!ent->clock->isReady()) {
+							ent->clock->increment();
+						}
+						if (ent->clock->isReady()) {
+							//std::cout << ent->name << ent->clock->getEnergy() << std::endl;
+							ent->ai->update(ent);
+						}
 					}
 				}
 			}

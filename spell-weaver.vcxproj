@@ -152,6 +152,7 @@
     <ClCompile Include="src\clock.cpp" />
     <ClCompile Include="src\combat.cpp" />
     <ClCompile Include="src\display.cpp" />
+    <ClCompile Include="src\elements.cpp" />
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\entity.cpp" />
     <ClCompile Include="src\gui.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="src\map.cpp" />
     <ClCompile Include="src\mortal.cpp" />
     <ClCompile Include="src\movement.cpp" />
+    <ClCompile Include="src\spell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ai.hpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="src\clock.hpp" />
     <ClInclude Include="src\combat.hpp" />
     <ClInclude Include="src\display.hpp" />
+    <ClInclude Include="src\elements.hpp" />
     <ClInclude Include="src\engine.hpp" />
     <ClInclude Include="src\entity.hpp" />
     <ClInclude Include="src\gui.hpp" />
@@ -177,6 +180,7 @@
     <ClInclude Include="src\map.hpp" />
     <ClInclude Include="src\mortal.hpp" />
     <ClInclude Include="src\movement.hpp" />
+    <ClInclude Include="src\spell.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
