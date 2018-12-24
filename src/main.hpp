@@ -11,7 +11,9 @@
 #include "libtcod.hpp"
 
 class Entity;
+struct coords;
 
+#include "space.hpp"
 #include "mortal.hpp"
 #include "display.hpp"
 #include "combat.hpp"

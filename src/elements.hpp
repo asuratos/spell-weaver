@@ -13,7 +13,7 @@ public:
 
 	virtual ~ElementUnit();
 
-	virtual void update(const std::shared_ptr<ElementUnit> self);
+	virtual void update(const std::shared_ptr<ElementUnit> self) = 0;
 };
 
 class FireElement : public ElementUnit {
@@ -22,7 +22,7 @@ protected:
 	
 
 public:
-	FireElement(coords loc) : ElementUnit(loc);
+	FireElement(coords loc);
 
 	void update(const std::shared_ptr<ElementUnit> self);
 };

@@ -4,4 +4,4 @@ SpellComponent::SpellComponent(std::map<coords, coords> front) : spellfront(fron
 
 SpellComponent::~SpellComponent() {};
 
-SpellComponent::createElement()
+void SpellComponent::createElement() {};
