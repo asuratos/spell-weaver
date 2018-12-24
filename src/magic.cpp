@@ -4,7 +4,7 @@ MagicSystem::MagicSystem() {}
 
 MagicSystem::~MagicSystem() {}
 
-MagicSystem::spellName MagicSystem::lookup(std::string spellstring) {
+MagicSystem::spellEnum MagicSystem::lookup(std::string spellstring) {
 	std::map<std::string, Spell> spellList = {};
 }
 

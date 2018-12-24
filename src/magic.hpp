@@ -8,7 +8,7 @@ public:
 
 class MagicSystem {
 	//AEFSW
-	enum spellName { A, E, F, S, W,
+	enum spellEnum { A, E, F, S, W,
 					//two element spells
 					AA, AE, AF, AS, AW,
 					EE, EF, ES, EW,
@@ -27,11 +27,14 @@ class MagicSystem {
 					AEF, AES, AEW, AFS, AFW,
 					ASW, EFS, EFW, ESW, FSW};
 
+	std::map<std::string, spellEnum> spellNames;
+	//initialize spell names here (loop pulling from outside source?)
+
 public:
 
 	MagicSystem(); ~MagicSystem();
 
 	void castSpell(const std::shared_ptr<Entity> &ent);
 
-	spellName lookup(std::string spellstring);
+	spellEnum lookup(std::string spellstring);
 };
