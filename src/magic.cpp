@@ -20,7 +20,7 @@ void MagicSystem::castSpell(const std::shared_ptr<Entity> &ent) {
 	engine.gui->message(spellstring, TCODColor::white);
 
 	//switch (spell) {
-	//case LESSERMIRE: engine.gui->message(spellstring, TCODColor::red); break;
+	//case WHATEVER: engine.gui->message(spellstring, TCODColor::red); break;
 	//}
 
 	//if it requires a direction, ask for direction

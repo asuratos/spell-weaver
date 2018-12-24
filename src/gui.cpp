@@ -19,7 +19,21 @@ void Gui::render() {
 	renderBar(1, 1, 12, "HP", (float)engine.player->mortal->hp, (float)engine.player->mortal->MaxHp, TCODColor::darkerRed, TCODColor::lightRed);
 
 	//render spell cache
-	con->print(1, 2, std::string("[ ][ ][ ]"));
+	std::string spellstr = engine.player->caster->getWeaves();
+	std::string spellcachestr;
+	int spellstrlen = spellstr.length();
+
+
+	for (int i = 0; i < spellstrlen; i++) {
+		spellcachestr += "[";
+		spellcachestr += spellstr[i];
+		spellcachestr += "]";
+	}
+
+	for (int i = 3; i > spellstrlen; i--) {
+		spellcachestr += "[ ]";
+	}
+	con->print(1, 2, spellcachestr);
 
 	//render messages in log
 	int lineno = 1; float opac = 1.0f;

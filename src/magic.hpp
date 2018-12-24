@@ -7,7 +7,25 @@ public:
 };
 
 class MagicSystem {
-	enum spellName { F, W, E, A, S };
+	//AEFSW
+	enum spellName { A, E, F, S, W,
+					//two element spells
+					AA, AE, AF, AS, AW,
+					EE, EF, ES, EW,
+					FF, FS, FW,
+					SS, SW,
+					WW,
+					
+					//three element spells
+					//XXY, XXX type
+					AAA, AAE, AAF, AAS, AAW,
+					AEE, EEE, EEF, EES, EEW,
+					AFF, EFF, FFF, FFS, FFW,
+					AWW, EWW, FWW, SWW, WWW,
+					
+					//XYZ type
+					AEF, AES, AEW, AFS, AFW,
+					ASW, EFS, EFW, ESW, FSW};
 
 public:
 

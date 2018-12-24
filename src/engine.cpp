@@ -23,6 +23,7 @@ Engine::Engine(int sW, int sH) : fovRad(20), computeFov(true) , sW(sW), sH(sH), 
 
 	entL.push_back(player);
 
+	//setting up the gui
 	Mover = std::make_unique<MovementSystem>();
 	gui = std::make_unique<Gui>(guiheight);
 	dungeon = std::make_unique<Map>(sW, sH-guiheight);
